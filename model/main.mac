@@ -1,0 +1,18 @@
+Finish
+/clear
+/title, Jiashao Bridge
+/view, 1, 0, 0, 1
+! units: N, m, kg
+
+/prep 7
+
+! inputs
+/input, geometry.mac
+
+Finish
+
+/solu
+
+
+Solve
+Finish
