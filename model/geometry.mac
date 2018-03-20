@@ -1,0 +1,67 @@
+/filename, JiashaoBridge
+/title, JiashaoBridge
+
+csys, 0                     !!! global coordination
+finish
+
+/prep7
+!!! Basic parameters
+*afun, deg
+girder_element_num = 363            !!! number of girder elements
+tower_element_num = 30              !!! number of tower elements
+tower_num = 6                       !!! number of towers
+distance_between_towers = 428       !!! distance between towers
+offset_outer_cable = 10.45          !!! outer cable to girder center
+offset_inner_cable = 11.01          !!! inner cable to girder center
+
+!!! Inport coordinates
+*dim, left_girder_coord, table, girder_element_num, 4
+*tread, left_girder_coord, left_girder_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
+
+*dim, tower_coord, table, tower_element_num, 5
+*tread, tower_coord, tower_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
+
+
+!!! Element types
+et, 1, beam188              !!! main girder
+et, 2, beam188              !!! rigid constrain
+et, 3, beam188              !!! main tower
+et, 4, link10               !!! cables
+et, 5, beam188              !!! traverse girder
+et, 6, beam188              !!! aux girder
+
+
+!!! Element properties
+uimp, 1, ex, nuxy, dens, 2.1e11,  0.3,    7850 * 1.18   !!! main girder
+uimp, 2, ex, nuxy, dens, 2.1e11,  0.3,    0             !!! rigid constrain
+uimp, 3, ex, nuxy, dens, 3.45e10, 0.1667, 2680          !!! main tower
+uimp, 4, ex, nuxy, dens, 1.95e11, 0.3,    7850 * 1.08   !!! main cable
+uimp, 5, ex, nuxy, dens, 2.1e11,  0.3,    7850 * 1      !!! traverse girder
+uimp, 6, ex, nuxy, dens, 2.1e11,  0.3,    7850 * 0      !!! aux beam
+
+
+!!! Generate kpoints of girder
+*do, i, 1, girder_element_num
+    !!! outer girder
+    n, i,        left_girder_coord(i, 1), left_girder_coord(i, 2) + 50, left_girder_coord(i, 3)
+    n, i + 500,  left_girder_coord(i, 1), left_girder_coord(i, 2) + 50, left_girder_coord(i, 3) - offset_outer_cable
+    n, i + 1000, left_girder_coord(i, 1), left_girder_coord(i, 2) + 50, left_girder_coord(i, 3) + offset_inner_cable
+
+    !!! inner girder
+    n, i + 1500, left_girder_coord(i, 1), left_girder_coord(i, 2) + 50, -left_girder_coord(i, 3)
+    n, i + 2000, left_girder_coord(i, 1), left_girder_coord(i, 2) + 50, -left_girder_coord(i, 3) + offset_outer_cable
+    n, i + 2500, left_girder_coord(i, 1), left_girder_coord(i, 2) + 50, -left_girder_coord(i, 3) - offset_inner_cable
+
+    n, i + 4000, left_girder_coord(i, 1), left_girder_coord(i, 2) + 50, 0
+*enddo
+
+!!! Generate kpoints of tower
+*do,i,1,tower_num
+    *do,j,1,tower_element_num
+            tmp_x=tower_coord(j,1)+distance_between_towers*(i-1)
+            tmp_y=tower_coord(j,2)+50
+            tmp_z=tower_coord(j,3)
+            node_num=5000+100*(i-1)+j
+            n,node_num,tmp_x,tmp_y,tmp_z
+    *enddo
+*enddo
