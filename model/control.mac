@@ -1,4 +1,5 @@
 /prep7 
-/input, 'MainParameter', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\models'
+/input, 'main_parameter', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
+/input, 'element_generator', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
 
 save

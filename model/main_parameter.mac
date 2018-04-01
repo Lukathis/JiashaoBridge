@@ -1,0 +1,43 @@
+finish
+/clear
+/filname, JiashaoBridge
+/title, JiashaoBridge
+
+csys, 0                     !!! global coordination
+finish
+
+/prep7
+!!! Basic parameters
+*afun, deg
+girder_element_num = 363            !!! number of girder elements
+tower_element_num = 30              !!! number of tower elements
+tower_num = 6                       !!! number of towers
+distance_between_towers = 428       !!! distance between towers
+offset_outer_cable = 10.45          !!! outer cable to girder center
+offset_inner_cable = 11.01          !!! inner cable to girder center
+
+!!! Inport coordinates
+*dim, left_girder_coord, table, girder_element_num, 4
+*tread, left_girder_coord, left_girder_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
+
+*dim, tower_coord, table, tower_element_num, 5
+*tread, tower_coord, tower_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
+
+
+!!! Element types
+et, 1, beam188              !!! main girder
+et, 2, beam188              !!! rigid constrain
+et, 3, beam188              !!! main tower
+et, 4, link10               !!! cables
+et, 5, beam188              !!! traverse girder
+et, 6, beam188              !!! aux girder
+
+
+!!! Element properties
+uimp, 1, ex, nuxy, dens, 2.1e11,  0.3,    7850*1.18   !!! main girder
+uimp, 2, ex, nuxy, dens, 2.1e11,  0.3,    0           !!! rigid constrain
+uimp, 3, ex, nuxy, dens, 3.45e10, 0.1667, 2680        !!! main tower
+uimp, 4, ex, nuxy, dens, 1.95e11, 0.3,    7850*1.08   !!! main cable
+uimp, 5, ex, nuxy, dens, 2.1e11,  0.3,    7850*1      !!! traverse girder
+uimp, 6, ex, nuxy, dens, 2.1e11,  0.3,    7850*0      !!! aux beam 
+

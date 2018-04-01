@@ -1,0 +1,39 @@
+!!! ---------------------------------- 1. Generate nodes ------------------------------------------
+!!! Generate nodes of girder
+*do, i, 1, girder_element_num
+    !!! outer girder
+    n, i,        left_girder_coord(i, 1), left_girder_coord(i, 2)+50, left_girder_coord(i, 3)
+    n, i+500,  left_girder_coord(i, 1), left_girder_coord(i, 2)+50, left_girder_coord(i, 3) - offset_outer_cable
+    n, i+1000, left_girder_coord(i, 1), left_girder_coord(i, 2)+50, left_girder_coord(i, 3)+offset_inner_cable
+
+    !!! inner girder
+    n, i+1500, left_girder_coord(i, 1), left_girder_coord(i, 2)+50, -left_girder_coord(i, 3)
+    n, i+2000, left_girder_coord(i, 1), left_girder_coord(i, 2)+50, -left_girder_coord(i, 3)+offset_outer_cable
+    n, i+2500, left_girder_coord(i, 1), left_girder_coord(i, 2)+50, -left_girder_coord(i, 3) - offset_inner_cable
+
+    n, i+4000, left_girder_coord(i, 1), left_girder_coord(i, 2)+50, 0
+*enddo
+
+!!! Generate nodes of tower
+*do,i,1,tower_num
+    *do,j,1,tower_element_num
+            tmp_x=tower_coord(j,1)+distance_between_towers*(i-1)
+            tmp_y=tower_coord(j,2)+50
+            tmp_z=tower_coord(j,3)
+            node_num=5000+100*(i-1)+j
+            n,node_num,tmp_x,tmp_y,tmp_z
+    *enddo
+*enddo
+
+!!! Generate reference nodes
+n, 10001, -1,   10000,    0
+n, 10002, -1,  -10000,    0
+n, 10003, 1000, 10000, -100 
+
+
+!!! ---------------------------------- 2. Generate element ------------------------------------------
+!!! Generate elements of girder
+
+
+
+!!! ---------------------------------- 3. Constraints ------------------------------------------
