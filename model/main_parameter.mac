@@ -8,13 +8,23 @@ finish
 
 /prep7
 !!! Basic parameters
-*afun, deg
+*afun,deg
+pi = 3.1415926535898                !!! pi
 girder_element_num = 363            !!! number of girder elements
 tower_element_num = 30              !!! number of tower elements
 tower_num = 6                       !!! number of towers
 distance_between_towers = 428       !!! distance between towers
+
 offset_outer_cable = 10.45          !!! outer cable to girder center
 offset_inner_cable = 11.01          !!! inner cable to girder center
+
+side_span_north = 357.96            !!! north side span
+side_span_south = 357.96            !!! south side span
+
+section_real_num = 18               !!! Real constants of main sections
+
+cable_num = 12                      !!! Number of main calbe on one side
+cable_real_num = 144                !!! Number of real constants of cable
 
 !!! Inport coordinates
 *dim, left_girder_coord, table, girder_element_num, 4
@@ -24,7 +34,7 @@ offset_inner_cable = 11.01          !!! inner cable to girder center
 *tread, tower_coord, tower_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
 
 
-!!! Element types
+!!! -------------------------Element types-------------------------
 et, 1, beam188              !!! main girder
 et, 2, beam188              !!! rigid constrain
 et, 3, beam188              !!! main tower
@@ -32,12 +42,28 @@ et, 4, link10               !!! cables
 et, 5, beam188              !!! traverse girder
 et, 6, beam188              !!! aux girder
 
-
-!!! Element properties
+!!! ----------------------Element material properties-------------------------
 uimp, 1, ex, nuxy, dens, 2.1e11,  0.3,    7850*1.18   !!! main girder
 uimp, 2, ex, nuxy, dens, 2.1e11,  0.3,    0           !!! rigid constrain
 uimp, 3, ex, nuxy, dens, 3.45e10, 0.1667, 2680        !!! main tower
 uimp, 4, ex, nuxy, dens, 1.95e11, 0.3,    7850*1.08   !!! main cable
 uimp, 5, ex, nuxy, dens, 2.1e11,  0.3,    7850*1      !!! traverse girder
 uimp, 6, ex, nuxy, dens, 2.1e11,  0.3,    7850*0      !!! aux beam 
+
+!!! -------------------------Element section types-------------------------
+!!! Cable elements
+*do,i,1,16
+    sectype,i,beam,mesh,Tower_%i%
+    secoffset,cent
+    secread,Tower_%i%,'sect',C:\Users\xuchi\Desktop\JiashaoBridge\model\Section\,mesh
+*enddo
+
+!!! Girder elements
+sectype,17,beam,mesh,Girder_L
+secoffset,cent
+secread,Girder_L,'sect',C:\Users\xuchi\Desktop\JiashaoBridge\model\Section\,mesh
+
+sectype,18,beam,mesh,Girder_C
+secoffset,cent
+secread,Girder_C,'sect',C:\Users\xuchi\Desktop\JiashaoBridge\model\Section\,mesh
 
