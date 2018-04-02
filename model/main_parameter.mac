@@ -21,18 +21,17 @@ offset_inner_cable = 11.01          !!! inner cable to girder center
 side_span_north = 357.96            !!! north side span
 side_span_south = 357.96            !!! south side span
 
-section_real_num = 18               !!! Real constants of main sections
+tower_real_num = 18                 !!! Real constants number of main tower
 
 cable_num = 12                      !!! Number of main calbe on one side
 cable_real_num = 144                !!! Number of real constants of cable
 
-!!! Inport coordinates
-*dim, left_girder_coord, table, girder_element_num, 4
+!!! -------------------------Import coordinates-------------------------
+*dim, left_girder_coord, table, girder_element_num, 4               !!! main girder coordinates
 *tread, left_girder_coord, left_girder_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
 
-*dim, tower_coord, table, tower_element_num, 5
+*dim, tower_coord, table, tower_element_num, 5                      !!! main tower coordinates
 *tread, tower_coord, tower_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
-
 
 !!! -------------------------Element types-------------------------
 et, 1, beam188              !!! main girder
@@ -51,14 +50,14 @@ uimp, 5, ex, nuxy, dens, 2.1e11,  0.3,    7850*1      !!! traverse girder
 uimp, 6, ex, nuxy, dens, 2.1e11,  0.3,    7850*0      !!! aux beam 
 
 !!! -------------------------Element section types-------------------------
-!!! Cable elements
+!!! Cable elements sectiions
 *do,i,1,16
     sectype,i,beam,mesh,Tower_%i%
     secoffset,cent
     secread,Tower_%i%,'sect',C:\Users\xuchi\Desktop\JiashaoBridge\model\Section\,mesh
 *enddo
 
-!!! Girder elements
+!!! Girder elements sections
 sectype,17,beam,mesh,Girder_L
 secoffset,cent
 secread,Girder_L,'sect',C:\Users\xuchi\Desktop\JiashaoBridge\model\Section\,mesh
@@ -67,3 +66,27 @@ sectype,18,beam,mesh,Girder_C
 secoffset,cent
 secread,Girder_C,'sect',C:\Users\xuchi\Desktop\JiashaoBridge\model\Section\,mesh
 
+
+!!! -------------------------Constants-------------------------
+!!! Real constants of tower sections
+*dim,tower_reals,table,tower_real_num,8,1
+*tread,tower_reals,tower_reals,real,C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
+
+!!! Real constants of cables
+*dim,cable_reals,table,cable_real_num,2,1
+*tread,cable_reals,cable_reals,real,C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
+
+!!! BEAM188 ignores real constants?
+*do,i,1,tower_real_num
+    r,i,tower_reals(i,1),tower_reals(i,3),tower_reals(i,2),tower_reals(i,6),tower_reals(i,5),tower_reals(i,4)
+*enddo
+
+r,101,100,100,100,0.1,0.1
+rmore, ,  , tower_reals(i,4)*10
+
+R,102,0.001,0.001,0.001,0.001,0.001
+RMORE, ,  , 0.001
+
+*do,i,1,cable_real_num
+    r,1000+i,cable_reals(i,1)/1000000,cable_reals(i,2)
+*enddo
