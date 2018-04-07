@@ -1,0 +1,12 @@
+/prep7
+/INPUT,'MainParameter','TXT','C:\Users\xuchi\Desktop\JiashaoBridge\shidi\Model'           !!!!!!!一些主要的参数
+                                                                         
+/INPUT,'ElementForm','TXT','C:\Users\xuchi\Desktop\JiashaoBridge\shidi\Model'  
+
+!!/INPUT,'AdjustCable','TXT','C:\Users\xuchi\Desktop\JiashaoBridge\shidi\MACRO\'
+
+/INPUT,'modal','mac','C:\Users\xuchi\Desktop\JiashaoBridge\shidi\MACRO\'
+
+!/INPUT,'Gmass','mac','C:\Users\xuchi\Desktop\JiashaoBridge\shidi\MACRO\'
+
+SAVE

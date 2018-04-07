@@ -1,5 +1,5 @@
 !!! ---------------------------------- 1. Generate nodes ------------------------------------------
-!!! Generate nodes of girder
+!!! 1.1 Generate nodes of girder
 *do, i, 1, girder_element_num
     !!! outer girder
     n, i,        left_girder_coord(i, 1), left_girder_coord(i, 2)+50, left_girder_coord(i, 3)
@@ -14,7 +14,7 @@
     n, i+4000, left_girder_coord(i, 1), left_girder_coord(i, 2)+50, 0
 *enddo
 
-!!! Generate nodes of tower
+!!! 1.2 Generate nodes of tower
 *do,i,1,tower_num
     *do,j,1,tower_element_num
             tmp_x=tower_coord(j,1)+distance_between_towers*(i-1)
@@ -25,15 +25,42 @@
     *enddo
 *enddo
 
-!!! Generate reference nodes
+!!! 1.3 Generate reference nodes
 n, 10001, -1,   10000,    0
 n, 10002, -1,  -10000,    0
 n, 10003, 1000, 10000, -100 
 
 
 !!! ---------------------------------- 2. Generate element ------------------------------------------
-!!! Generate elements of girder
+!!! 2.1 Generate elements of girder
+type,1
+mat,1
+secnum,17
+real,17
+*do,i,1,girder_element_num-1
+    en,i,i+1,i,10001
+    en,ii+500,i+1500,i+1501,10001
+*enddo
 
+!!! 2.2 rigid constrain
+type,2
+mat,2
+real,101
+*do,i,1,girder_element_num
+    en,i+1000,i,i+500,10003
+    en,i+1500,i,i+1000,10003
 
+    en,i+2000,i+1500,i+2000,10003
+    en,i+2500,i+1500,i+2500,10003
+*enddo
 
-!!! ---------------------------------- 3. Constraints ------------------------------------------
+!!! 2.3 main tower
+type,3
+mat,3
+*do,i,0,tower_num-1
+    *do,j,1,tower_element_num-1
+        secnum,tower_coord(j+1,5)
+        real,tower_coord(j+1,5)
+        en,j+3000+i*50,j+50*i+3000,j+50*i+3001,10001
+    *enddo
+*enddo

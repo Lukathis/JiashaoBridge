@@ -1,0 +1,233 @@
+finish
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Gir_L,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Gir_L, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Gir_C,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Gir_C, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_1,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_1, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_2,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_2, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_3,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_3, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_4,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_4, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_5,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_5, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_6,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_6, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_7,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_7, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_8,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_8, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_9,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_9, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_10,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_10, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_11,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_11, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_12,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_12, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_13,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_13, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_14,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_14, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_15,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_15, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT
+  
+  finish  
+/CLEAR,START
+/PREP7
+ET,1,MESH200
+KEYOPT,1,1,7
+  ~SATIN,Tower_16,sat,'C:\Users\xuchi\Desktop\JiashaoBridge\SAT\',SOLIDS,0
+  AGLUE,all
+  LSEL, , , ,all
+  LESIZE,all, , ,1, , , , ,1
+  TYPE,1
+  AMESH,ALL
+  SECWRITE, Tower_16, SECT, 'C:\Users\xuchi\Desktop\JiashaoBridge\SECT\', SECT

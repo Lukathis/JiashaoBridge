@@ -84,8 +84,8 @@ secread,Girder_C,'sect',C:\Users\xuchi\Desktop\JiashaoBridge\model\Section\,mesh
 r,101,100,100,100,0.1,0.1
 rmore, ,  , tower_reals(i,4)*10
 
-R,102,0.001,0.001,0.001,0.001,0.001
-RMORE, ,  , 0.001
+r,102,0.001,0.001,0.001,0.001,0.001
+rmore, ,  , 0.001
 
 *do,i,1,cable_real_num
     r,1000+i,cable_reals(i,1)/1000000,cable_reals(i,2)

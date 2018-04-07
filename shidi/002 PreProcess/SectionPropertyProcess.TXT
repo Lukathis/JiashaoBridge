@@ -1,0 +1,69 @@
+FINISH
+/clear,start
+/filname,JiaShaoBridge
+/title,JiaShaoBridge
+csys,0 
+
+/PREP7 
+NumberSection=18
+*DO,II,1,16
+  SECTYPE,II,BEAM,MESH,Tower_%II%          
+  SECOFFSET,CENT,,,                    
+  SECREAD,Tower_%II% ,'SECT',,MESH
+*ENDDO
+
+SECTYPE,17,BEAM,MESH,Gir_L         
+SECOFFSET,CENT,,,                    
+SECREAD,Gir_L ,'SECT',,MESH
+
+SECTYPE,18,BEAM,MESH,Gir_C        
+SECOFFSET,CENT,,,                    
+SECREAD,Gir_C ,'SECT',,MESH
+                                                                            
+*DIM,SectionProperty,ARRAY,NumberSection,7                                                                                  
+                                                                                                             
+
+*DO,II,1,NumberSection,1                                                                                             
+ *GET,area,SECP,II,PROP,AREA                                                                                 
+ *GET,iyy,SECP,II,PROP,IYY                                                                                   
+ *GET,izz,SECP,II,PROP,IZZ                                                                                   
+ *GET,ixx,SECP,II,PROP,TORS 
+ *GET,OFFY,SECP,II,PROP,OFFY
+ *GET,OFFZ,SECP,II,PROP,OFFZ
+                                                                                  
+ SectionProperty(II,1)=II                                                                                      
+ SectionProperty(II,2)=area                                                                                    
+ SectionProperty(II,3)=iyy                                                                                     
+ SectionProperty(II,4)=izz                                                                                     
+ SectionProperty(II,5)=ixx 
+ SectionProperty(II,6)=OFFY 
+ SectionProperty(II,7)=OFFZ                                                                                     
+*ENDDO                                                                                                   
+                                                                                                     
+*DIM,MABELW0,CHAR,1                                                                                        
+*DIM,MABELW1,CHAR,1                                                                                         
+*DIM,MABELW2,CHAR,1                                                                                         
+*DIM,MABELW3,CHAR,1                                                                                         
+*DIM,MABELW4,CHAR,1 
+*DIM,MABELW5,CHAR,1 
+*DIM,MABELW6,CHAR,1 
+                                                                                        
+MABELW0(1)='NUMBER'                                                                                         
+MABELW1(1)='AREA'                                                                                           
+MABELW2(1)='IYY'                                                                                            
+MABELW3(1)='IZZ'                                                                                            
+MABELW4(1)='IXX'
+MABELW5(1)='OFFX'
+MABELW6(1)='OFFY' 
+
+                                                                                           
+*CREATE,SectionProperty                                                                                            
+*CFOPEN,'SectionProperty.csv',                                                                                  
+*VWRITE,MABELW0(1),MABELW1(1),MABELW2(1),MABELW3(1),MABELW4(1),MABELW5(1),MABELW6(1)                                              
+(A13,',',A13,',',A13,',',A13,',',A13,',',A13,',',A13)                                                                       
+*VWRITE,SectionProperty(1,1),SectionProperty(1,2),SectionProperty(1,3),SectionProperty(1,4),SectionProperty(1,5),SectionProperty(1,6),SectionProperty(1,7)                          
+(F15.6,',',F15.6,',',F15.6,',',F15.6,',',F15.6,',',F15.6,',',F15.6)                                                             
+*CFCLOS                                                                                                     
+*END                                                                                                        
+/input,SectionProperty                                                                             
+                                                                                   
