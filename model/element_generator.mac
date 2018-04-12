@@ -109,3 +109,72 @@ mat,4
 *enddo
 
 !!! ---------------------------------- 3. Constraints ------------------------------------------
+allsel,all
+
+
+!!! apply constraints
+count_0 = 0;
+count_1 = 0;
+
+!!! count and initialize array
+*do,i,1,girder_element_num
+    *if,left_girder_coord(i,4),eq,1,then
+        count_0=count_0+1
+    *elseif,left_girder_coord(i,4),eq,4,then
+        count_1=count_1+1
+    *endif
+*enddo
+
+*dim,cons_1,array,count_0,2
+*dim,cons_2,array,count_1,2
+
+count_0=0
+count_1=0
+
+*do,i,1,girder_element_num
+    *if,left_girder_coord(i,4),eq,1,then
+        count_0=count_0+1
+        cons_1(count_0,1)=i
+        cons_1(count_0,2)=i+1500
+    *elseif,left_girder_coord(i,4),eq,4,then
+        count_1=count_1+1
+        cons_2(count_1,1)=i
+        cons_2(count_1,2)=i+1500
+    *endif
+*enddo
+
+*do,i,1,count_0
+    d,cons_1(i,1),uz
+    d,cons_1(i,1),uy
+    d,cons_1(i,1),rotx
+
+    d,cons_1(i,2),uz
+    d,cons_1(i,2),uy
+    d,cons_1(i,2),rotx
+*enddo
+
+*do,i,1,tower_num
+    d,1+50*(i-1)+3000,all
+    cp, i*3-2, uz, 7+50*(i-1)+3000, cons_2(i*2-1,1), cons_2(i*2,1), cons_2(i*2-1,2), cons_2(i*2,2)
+    cp, i*3-1, ux, 7+50*(i-1)+3000, cons_2(i*2-1,1), cons_2(i*2,1), cons_2(i*2-1,2), cons_2(i*2,2)
+    cp, i*3-1, uy, 7+50*(i-1)+3000, cons_2(i*2-1,1), cons_2(i*2,1), cons_2(i*2-1,2), cons_2(i*2,2)
+*enddo
+
+ALLSEL,ALL
+NSLE,S
+NSEL,INVE
+NDELE,ALL
+ALLSEL,ALL
+ACEL, ,10
+
+/RGB,INDEX,100,100,100, 0                                                                                                                                                                                                                        
+/RGB,INDEX, 80, 80, 80,13                                                                                                                                                                                                                        
+/RGB,INDEX, 60, 60, 60,14                                                                                                                                                                                                                        
+/RGB,INDEX,  0,  0,  0,15                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                 
+/COLOR,WBAK,BLAC,1                                                                                                                                                                                                                               
+/COLOR,WBAK,BLAC,2                                                                                                                                                                                                                               
+/COLOR,WBAK,BLAC,3                                                                                                                                                                                                                               
+/COLOR,WBAK,BLAC,4                                                                                                                                                                                                                               
+/COLOR,WBAK,BLAC,5                                                                                                                                                                                                                               
+/REPLOT
