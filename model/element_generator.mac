@@ -113,8 +113,8 @@ allsel,all
 
 
 !!! apply constraints
-count_0 = 0;
-count_1 = 0;
+count_0 = 0
+count_1 = 0
 
 !!! count and initialize array
 *do,i,1,girder_element_num
