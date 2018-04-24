@@ -76,6 +76,10 @@ secread,Girder_C,'sect',C:\Users\xuchi\Desktop\JiashaoBridge\model\Section\,mesh
 *dim,cable_reals,table,cable_real_num,2,1
 *tread,cable_reals,cable_reals,real,C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
 
+*do,i,1,cable_real_num
+    r,1000+i,cable_reals(i,1)/1000000,cable_reals(i,2)
+*enddo
+
 !!! BEAM188 ignores real constants?
 *do,i,1,tower_real_num
     r,i,tower_reals(i,1),tower_reals(i,3),tower_reals(i,2),tower_reals(i,6),tower_reals(i,5),tower_reals(i,4)
@@ -86,7 +90,3 @@ rmore, ,  , tower_reals(i,4)*10
 
 r,102,0.001,0.001,0.001,0.001,0.001
 rmore, ,  , 0.001
-
-*do,i,1,cable_real_num
-    r,1000+i,cable_reals(i,1)/1000000,cable_reals(i,2)
-*enddo

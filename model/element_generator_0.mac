@@ -33,7 +33,6 @@ n, 10003, 1000, 10000, -100
 
 !!! ---------------------------------- 2. Generate element ------------------------------------------
 !!! 2.1 Generate elements of girder
-lsel,none
 type,1
 mat,1
 secnum,17
@@ -42,7 +41,6 @@ real,17
     en,i,i+1,i,10001
     en,i+500,i+1500,i+1501,10001
 *enddo
-cm,girders,elem
 
 !!! 2.2 rigid constrain
 type,2
