@@ -25,48 +25,47 @@
     *enddo
 *enddo
 
+!!! 1.3 Generate reference nodes
+n, 10001, -1,   10000,    0
+n, 10002, -1,  -10000,    0
+n, 10003, 1000, 10000, -100 
+
+
 !!! ---------------------------------- 2. Generate element ------------------------------------------
 !!! 2.1 Generate elements of girder
-esel,none
 type,1
 mat,1
 secnum,17
 real,17
 *do,i,1,girder_element_num-1
-    en,i,i+1,i
-    en,i+500,i+1500,i+1501
+    en,i,i+1,i,10001
+    en,i+500,i+1500,i+1501,10001
 *enddo
-cm,GIRDERS,elem
 
 !!! 2.2 rigid constrain
-esel,none
 type,2
 mat,2
 real,101
 *do,i,1,girder_element_num
-    en,i+1000,i,i+500
-    en,i+1500,i,i+1000
+    en,i+1000,i,i+500,10003
+    en,i+1500,i,i+1000,10003
 
-    en,i+2000,i+1500,i+2000
-    en,i+2500,i+1500,i+2500
+    en,i+2000,i+1500,i+2000,10003
+    en,i+2500,i+1500,i+2500,10003
 *enddo
-cm,RIGID_COMSTRAINTS,elem
 
 !!! 2.3 main tower
-esel,none
 type,3
 mat,3
 *do,i,0,tower_num-1
     *do,j,1,tower_element_num-1
         secnum,tower_coord(j+1,5)
         real,tower_coord(j+1,5)
-        en,j+3000+i*50,j+50*i+3000,j+50*i+3001
+        en,j+3000+i*50,j+50*i+3000,j+50*i+3001,10001
     *enddo
 *enddo
-cm,TOWERS,elem
 
 !!! 2.4 cable elements
-esel,none
 *dim,cab_girder,array,cable_real_num,4
 *dim,cab_tower,array,cable_num,6
 
@@ -108,37 +107,6 @@ mat,4
         en,4000+i*8-0+j*cable_num*8,cab_tower(i,j+1),cab_girder(cable_num+i+j*2*cable_num,4)
     *enddo
 *enddo
-cm,CABLES,elem
-
-!!! 2.5 Traverse girder
-esel,none
-count_3=0
-*do,i,1,girder_element_num
-    *if,left_girder_coord(i,4),eq,5,then
-        count_3=count_3+1
-    *endif
-*enddo
-
-*dim,traverse_girder,array,count_3,3
-count_3=0
-*do,i,1,girder_element_num
-    *if,left_girder_coord(i,4),eq,5,then
-        count_3=count_3+1
-        traverse_girder(count_3,1)=i
-        traverse_girder(count_3,2)=i+1500
-        traverse_girder(count_3,3)=i+4000
-    *endif
-*enddo
-
-type,5
-mat,5
-secnum,18
-real,18
-*do,i,1,count_3
-    en,5000+i*2-1,traverse_girder(i,1),traverse_girder(i,3)
-    en,5000+i*2,traverse_girder(i,2),traverse_girder(i,3)
-*enddo
-cm,TRAVERSE_GIRDERS,elem
 
 !!! ---------------------------------- 3. Constraints ------------------------------------------
 allsel,all
@@ -192,5 +160,4 @@ count_1=0
     cp, i*3-1, uy, 7+50*(i-1)+3000, cons_2(i*2-1,1), cons_2(i*2,1), cons_2(i*2-1,2), cons_2(i*2,2)
 *enddo
 
-save,Jiashao,db
-resume,Jiashao,db
+

@@ -25,6 +25,15 @@
     *enddo
 *enddo
 
+!!! 1.3 K node for BEAM188
+n,10001,-1,10000,0
+n,10002,-1,-10000,0
+n,10003,1000,10000,-100
+
+*do,i,1,tower_num
+    n,10003+i,tower_coord(1,1)+distance_between_towers*(i-1),300,-1
+*enddo
+
 !!! ---------------------------------- 2. Generate element ------------------------------------------
 !!! 2.1 Generate elements of girder
 esel,none
@@ -33,8 +42,8 @@ mat,1
 secnum,17
 real,17
 *do,i,1,girder_element_num-1
-    en,i,i+1,i
-    en,i+500,i+1500,i+1501
+    en,i,i+1,i,10001
+    en,i+500,i+1500,i+1501,10001
 *enddo
 cm,GIRDERS,elem
 
@@ -44,11 +53,11 @@ type,2
 mat,2
 real,101
 *do,i,1,girder_element_num
-    en,i+1000,i,i+500
-    en,i+1500,i,i+1000
+    en,i+1000,i,i+500,10003
+    en,i+1500,i,i+1000,10003
 
-    en,i+2000,i+1500,i+2000
-    en,i+2500,i+1500,i+2500
+    en,i+2000,i+1500,i+2000,10003
+    en,i+2500,i+1500,i+2500,10003
 *enddo
 cm,RIGID_COMSTRAINTS,elem
 
@@ -60,7 +69,7 @@ mat,3
     *do,j,1,tower_element_num-1
         secnum,tower_coord(j+1,5)
         real,tower_coord(j+1,5)
-        en,j+3000+i*50,j+50*i+3000,j+50*i+3001
+        en,j+3000+i*50,j+50*i+3000,j+50*i+3001,10001
     *enddo
 *enddo
 cm,TOWERS,elem
@@ -111,7 +120,6 @@ mat,4
 cm,CABLES,elem
 
 !!! 2.5 Traverse girder
-esel,none
 count_3=0
 *do,i,1,girder_element_num
     *if,left_girder_coord(i,4),eq,5,then
@@ -135,10 +143,9 @@ mat,5
 secnum,18
 real,18
 *do,i,1,count_3
-    en,5000+i*2-1,traverse_girder(i,1),traverse_girder(i,3)
-    en,5000+i*2,traverse_girder(i,2),traverse_girder(i,3)
+    en,5000+i*2-1,traverse_girder(i,1),traverse_girder(i,3),10003
+    en,5000+i*2,traverse_girder(i,2),traverse_girder(i,3),10003
 *enddo
-cm,TRAVERSE_GIRDERS,elem
 
 !!! ---------------------------------- 3. Constraints ------------------------------------------
 allsel,all

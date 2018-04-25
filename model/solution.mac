@@ -1,21 +1,33 @@
 !!! Solve the issue
 
 esel,all
-nsel,s
-acel,,9.8,,             !!! Gravity
+acel,,9.8,,
 finish
+/solu
+antype,0
+outres,all,last
+allsel,all
+!acel,,9.81               !!! Gravity
+solve
+/output,static_analysis_result,txt,C:\Users\xuchi\Desktop\JiashaoBridge\model
 
-/eshape,1.0
-eplot
-/output,ifm,dat,,       !!! Output model info
 
-/input, modal, mac, C:\Users\xuchi\Desktop\JiashaoBridge\model
+!esel,all
+!nsel,s
+!acel,,9.81,,             !!! Gravity
+!finish
 
-/window,1,on
-/window,2,off
-/window,3,off
-/window,4,off
-/window,5,off
+!/eshape,1.0
+!eplot
+!/output,ifm,dat,,       !!! Output model info
 
-/window,1,full
-/replot
+!/input, modal, mac, C:\Users\xuchi\Desktop\JiashaoBridge\model
+
+!/window,1,on
+!/window,2,off
+!/window,3,off
+!/window,4,off
+!/window,5,off
+
+!/window,1,full
+!/replot

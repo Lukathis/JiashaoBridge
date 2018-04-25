@@ -28,18 +28,18 @@ cable_real_num = 144                !!! Number of real constants of cable
 
 !!! -------------------------Import coordinates-------------------------
 *dim, left_girder_coord, table, girder_element_num, 4               !!! main girder coordinates
-*tread, left_girder_coord, sym_left_girder_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
+*tread, left_girder_coord, left_girder_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
 
 *dim, tower_coord, table, tower_element_num, 5                      !!! main tower coordinates
-*tread, tower_coord, sym_tower_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
+*tread, tower_coord, tower_coord, txt, C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\
 
 !!! -------------------------Element types-------------------------
 et, 1, beam188              !!! main girder
-et, 2, beam4                !!! rigid constrain --- beam4?
+et, 2, beam188              !!! rigid constrain --- beam4?
 et, 3, beam188              !!! main tower
 et, 4, link10               !!! cables
 et, 5, beam188              !!! traverse girder
-et, 6, beam4                !!! aux girder      --- beam4?
+et, 6, beam188              !!! aux girder      --- beam4?
 
 !!! ----------------------Element material properties-------------------------
 uimp, 1, ex, nuxy, dens, 2.1e11,  0.3,    7850*1.18   !!! main girder

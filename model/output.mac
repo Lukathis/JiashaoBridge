@@ -1,0 +1,50 @@
+resume,Jiashao,db
+
+finish
+/post1
+etable,mi,smisc,6
+etable,mi,smisc,12
+plls,mi,mj
+
+!!! Girder Result
+esel,s,elem,,GIRDERS
+*dim,girder_moment_res,array,girder_element_num,9
+*do,i,1,girder_element_num
+    current_element_num=i
+
+    !!! col1: Girder element's first node number
+    current_node_nom=nelem(current_element_num,1)
+    girder_moment_res(i,1)=current_element_num
+
+    !!! col2 -> col4: x, y, z coordinates of the current element
+    !girder_moment_res(i,2)=nx(current_element_num)
+    !girder_moment_res(i,3)=ny(current_element_num)
+    !girder_moment_res(i,4)=nz(current_element_num)
+
+    !!! col5 -> col9
+    !!! get aaa, atab, 0, ncol, max
+    *get,current_mat_no,elem,current_element_num,attr,mat
+    *get,current_real_no,elem,current_element_num,attr,real
+
+
+    *get,girder_moment_res(i,5),etab,1,elem,current_element_num
+    *get,girder_moment_res(i,6),etab,2,elem,current_element_num
+    *get,girder_moment_res(i,7),ex,current_mat_no
+    *get,girder_moment_res(i,8),rcon,current_real_no,2
+    *get,girder_moment_res(i,9),elem,current_element_num,leng
+*enddo
+
+
+*cfopen,GirderMoment,txt
+*vwrite
+*cfclos
+
+!!! Tower Result
+
+
+!!! DONE
+allsel,all
+
+*msg,ui,'SUCCESS!'
+
+/exit,nosave
