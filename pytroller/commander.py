@@ -43,4 +43,4 @@ def RunAPDL():
 if __name__=="__main__":
     # RunAPDL()
     # subprocess.Popen(r'C:\Users\xuchi\Desktop\JiashaoBridge\test\apdl.exe', shell=False, close_fds=True)
-    p = subprocess.Popen(r'C:\Users\xuchi\Desktop\JiashaoBridge\test\apdl.exe',shell=True)
+    p = subprocess.Popen(r'apdl.exe',shell=True)
