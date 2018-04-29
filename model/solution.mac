@@ -1,13 +1,9 @@
 !!! Solve the issue
 
-esel,all
-acel,,9.8,,
-finish
-/solu
+/solu   
 antype,0
 outres,all,last
 allsel,all
-!acel,,9.81               !!! Gravity
 solve
 /output,static_analysis_result,txt,C:\Users\xuchi\Desktop\JiashaoBridge\model
 
