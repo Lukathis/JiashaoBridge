@@ -1,0 +1,17 @@
+finish
+
+/post1
+lcdef,1,1               !!! temp load
+lcdef,2,2               !!! foundation displacement load
+lcdef,3,3               !!! vehicle load
+lcdef,4,4               !!! wind displacement
+
+!!! LOAD COMBINATION 1
+lcfact,1,0.8
+lcfact,2,0.8
+
+lcase,1
+sumtype,prin
+lcoper,add,2            !!! lcdef1 + lcdef 2
+lcoper,lprin
+lcwrite,11              !!! LOAD COMBINATION 1 -> LOAD CASE 11

@@ -2,10 +2,61 @@
 
 /solu   
 antype,0
-outres,all,last
+
+uniform_temp_rise=20
+uniform_temp_down=-20
+
+! Condition 1. Dead load
+time,1
+esel,all
+acel,,9.8,,
 allsel,all
 solve
-/output,static_analysis_result,txt,C:\Users\xuchi\Desktop\JiashaoBridge\model
+
+! Condition 2. Uniform temperature rise
+time,2
+acel,0,0,0
+tref,0
+esel,s,elem,,GIRDERS
+bfe,all,temp,,uniform_temp_rise
+allsel,all
+solve
+
+! Condition 2. Uniform temperature down
+time,3
+acel,0,0,0
+tref,0
+bfe,GIRDERS,temp,,uniform_temp_down
+allsel,all
+solve
+
+! --------------Display result----------------------------
+/post1
+/eshape,0
+set,1,last
+plnsol,u,y
+
+set,2,last
+plnsol,u,y
+
+set,3,last
+plnsol,u,y
+
+! --------------Loac combination----------------------------
+lcdef,1,1,last
+lcdef,2,2,last
+
+! Effect factor
+lcfact,1,1.2
+lcfact,2,1.4
+
+! combine the load cases
+lcase,1
+lcoper,add,2
+
+plnsol,u,y
+
+!/output,static_analysis_result,txt,C:\Users\xuchi\Desktop\JiashaoBridge\model
 
 
 !esel,all
