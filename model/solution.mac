@@ -15,6 +15,14 @@ acel,,9.8,,
 allsel,all
 solve
 
+/post1
+etable,myi,smisc,2
+etable,myj,smisc,15
+esel,s,elem,,girders
+esel,a,elem,,CABLES
+/pbc,cp,,1
+plls,myi,myj,0.2
+
 ! Condition 2. Uniform temperature rise
 time,2
 acel,0,0,0

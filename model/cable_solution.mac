@@ -1,0 +1,25 @@
+!!! Solve the issue
+
+/solu   
+antype,0
+
+uniform_temp_rise=20
+uniform_temp_down=-20
+
+! Condition 1. Dead load
+time,1
+nlgeom,on                       !!! Switch on the none linear function
+sstif,on
+esel,all
+acel,,9.8,,
+allsel,all
+solve
+
+/post1
+etable,myi,smisc,2
+etable,myj,smisc,15
+esel,s,elem,,girders
+esel,a,elem,,CABLES
+/pbc,cp,,1
+/pbc,u,,1
+plls,myi,myj,0.2

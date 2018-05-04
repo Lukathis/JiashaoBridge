@@ -49,6 +49,12 @@ uimp, 4, ex, nuxy, dens, 1.95e11, 0.3,    7850*1.08   !!! main cable
 uimp, 5, ex, nuxy, dens, 2.1e11,  0.3,    7850*1      !!! traverse girder
 uimp, 6, ex, nuxy, dens, 2.1e11,  0.3,    7850*0      !!! aux beam 
 
+!!! Secant coefficient of thermal expansion
+mp, alpx, 1,1.2e-5
+mp, alpx, 2,1.2e-5
+mp, alpx, 3,1.2e-5
+mp, alpx, 4,1.2e-5
+
 !!! -------------------------Element section types-------------------------
 !!! Cable elements sectiions
 *do,i,1,16
@@ -75,7 +81,7 @@ secread,Girder_C,'sect',C:\Users\xuchi\Desktop\JiashaoBridge\model\Section\,mesh
 !!! Real constants of cables
 !!! Different reals corresponding to differernt cable initial strain -> Different cable initial stress
 *dim,cable_reals,table,cable_real_num,2,1
-*tread,cable_reals,cable_reals_1    ,real,C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\cable_reals
+*tread,cable_reals,cable_reals_new_order_1,real,C:\Users\xuchi\Desktop\JiashaoBridge\model\Parameter\cable_reals
 
 *do,i,1,cable_real_num
     r,1000+i,cable_reals(i,1)/1000000,cable_reals(i,2)
