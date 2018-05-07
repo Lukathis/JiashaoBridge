@@ -35,6 +35,7 @@ cable_real_num = 144                !!! Number of real constants of cable
 
 !!! -------------------------Element types-------------------------
 et, 1, beam188              !!! main girder
+keyopt,1,3,2
 et, 2, beam4                !!! rigid constrain --- beam4?
 et, 3, beam188              !!! main tower
 et, 4, link10               !!! cables
