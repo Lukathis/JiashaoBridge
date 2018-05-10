@@ -1,0 +1,16 @@
+inner_girder_element_total_num=362
+*dim,girder_volu,array,inner_girder_element_total_num,3
+*do,i,1,inner_girder_element_total_num
+    current_element_number=i
+    girder_volu(i,1)=i
+    *get,girder_volu(i,2),elem,i,leng
+    *get,girder_volu(i,3),elem,i,volu
+*enddo
+
+*get,girder_area,elem,1,volu
+*cfopen,girder_volu,txt
+*vwrite,girder_volu(1,1),girder_volu(1,2),girder_volu(1,3)
+(F4.0,F10.3,F10.3)
+*cfclos
+
+*get,angle_1,elem,

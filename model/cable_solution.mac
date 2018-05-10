@@ -19,7 +19,7 @@ solve
 etable,myi,smisc,2
 etable,myj,smisc,15
 esel,s,elem,,girders
-esel,a,elem,,CABLES
 /pbc,cp,,1
 /pbc,u,,1
 plls,myi,myj,0.2
+esel,a,elem,,CABLES
