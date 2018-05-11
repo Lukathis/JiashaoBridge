@@ -3,8 +3,7 @@
 /solu   
 antype,0
 
-uniform_temp_rise=20
-uniform_temp_down=-20
+prefix='CompStat'
 
 ! Condition 1. Dead load
 time,1
@@ -14,66 +13,3 @@ esel,all
 acel,,9.8,,
 allsel,all
 solve
-
-/post1
-etable,myi,smisc,2
-etable,myj,smisc,15
-esel,s,elem,,girders
-/pbc,cp,,1
-/pbc,u,,1
-plls,myi,myj,0.2
-esel,a,elem,,CABLES
-
-!!! Default settings
-/post1
-/gfile,1200             !!! Resolution
-/view,1,0,0,1           !!! View angle
-/dist,1,1200,0          !!! View distance, 0 means absolute distance while 1 means relative
-/pbc,cp,,0              !!! Turn off the cp
-/pbc,u,,0               !!! Turn off u
-/plopt,date,0           !!! Turn off date shown on jpeg images
-target_folder_path='pics/'
-
-!!! Bending moment of main girder
-/show,jpeg,,
-etable,myi,smisc,2
-etable,myj,smisc,15
-esel,s,elem,,girders
-plls,myi,myj,0.2
-esel,a,elem,,girders
-jpeg_name = 'CompleteState_Girder_BendingMoment'
-/show,close
-default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
-/rename,default_name,jpg,,jpeg_full_path,jpg
-
-
-!!! Shear force of main girder
-/show,jpeg,,
-etable,z_shf_i,smisc,5
-etable,z_shf_j,smisc,18
-esel,s,elem,,girders
-plls,z_shf_i,z_shf_j,0.1
-esel,a,elem,,cables
-jpeg_name = 'CompleteState_Girder_ShearForce'
-/show,close
-default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
-/rename,default_name,jpg,,jpeg_full_path,jpg
-
-!!! Shear force of main girder
-/show,jpeg,,
-esel,none
-esel,s,elem,,inner_girder
-etable,ax_stress_i,smisc,31
-etable,ax_stress_j,smisc,36
-plls,ax_stress_i,ax_stress_j,0.1
-esel,a,elem,,cables
-jpeg_name = 'CompleteState_Girder_AxialStress'
-/show,close
-default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
-/rename,default_name,jpg,,jpeg_full_path,jpg
-
-
-

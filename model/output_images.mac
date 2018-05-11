@@ -1,0 +1,52 @@
+!!! Parameters need to be modified:
+!!! prefix ='Cnd1'
+
+!!! -------------------Export results-------------------
+/post1
+/gfile,1200             !!! Resolution
+/view,1,0,0,1           !!! View angle
+/dist,1,1200,0          !!! View distance, 0 means absolute distance while 1 means relative
+/pbc,cp,,0              !!! Turn off the cp
+/pbc,u,,0               !!! Turn off u
+/plopt,date,0           !!! Turn off date shown on jpeg images
+target_folder_path='pics/'
+
+!!! 1. Bending moment of main girder
+/show,jpeg,,
+esel,s,elem,,girders
+etable,myi,smisc,2
+etable,myj,smisc,15
+esel,a,elem,,cables
+plls,myi,myj,0.2
+jpeg_name = strcat(prefix, '_Girder_BendingMoment')
+/show,close
+default_name=strcat('JiashaoBridge','000')
+jpeg_full_path=strcat(target_folder_path, jpeg_name)
+/rename,default_name,jpg,,jpeg_full_path,jpg
+
+
+!!! 2. Shear force of main girder
+/show,jpeg,,
+esel,s,elem,,girders
+etable,z_shf_i,smisc,5
+etable,z_shf_j,smisc,18
+esel,a,elem,,cables
+plls,z_shf_i,z_shf_j,0.1
+jpeg_name = strcat(prefix, '_Girder_ShearForce')
+/show,close
+default_name=strcat('JiashaoBridge','000')
+jpeg_full_path=strcat(target_folder_path, jpeg_name)
+/rename,default_name,jpg,,jpeg_full_path,jpg
+
+!!! 3. Axial stress of main girder
+/show,jpeg,,
+esel,s,elem,,girders
+etable,ax_stress_i,smisc,31
+etable,ax_stress_j,smisc,36
+esel,a,elem,,cables
+plls,ax_stress_i,ax_stress_j,0.1
+jpeg_name = strcat(prefix, '_Girder_AxialStress')
+/show,close
+default_name=strcat('JiashaoBridge','000')
+jpeg_full_path=strcat(target_folder_path, jpeg_name)
+/rename,default_name,jpg,,jpeg_full_path,jpg
