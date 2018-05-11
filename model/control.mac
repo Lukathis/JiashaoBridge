@@ -1,4 +1,8 @@
 /prep7
+/rgb,index,100,100,100,0
+/rgb,index,80,80,80,13
+/rgb,index,60,60,60,14
+/rgb,index,0,0,0,15
 /input, 'main_parameter', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
 /input, 'element_generator', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
 /input, 'cable_solution', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
