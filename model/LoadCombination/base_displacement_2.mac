@@ -1,0 +1,23 @@
+!!! Base displacement 2
+!!! +-+-+-
+
+/solu
+antype,0
+prefix='BaseDisp2'
+
+time,1
+nlgeom,on
+sstif,on
+
+!!! ------------------Add loads------------------------
+esel,all
+acel,,9.8,,
+d,3001,uy,0.2
+d,3051,uy,-0.2
+d,3101,uy,0.2
+d,3151,uy,-0.2
+d,3201,uy,0.2
+d,3251,uy,-0.2
+allsel,all
+solve
+
