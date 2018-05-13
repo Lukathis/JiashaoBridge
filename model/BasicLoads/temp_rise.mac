@@ -1,12 +1,11 @@
-!!! Load condition 1
-!!! Dead load + base displacement
+!!! Temp rise
 
 /solu
 antype,0
-prefix='Cnd1'
+prefix='TempRise'
 
+!!! Loads
 uniform_temp_rise=20
-uniform_temp_down=-20
 
 time,1
 nlgeom,on

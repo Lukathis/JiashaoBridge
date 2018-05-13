@@ -13,4 +13,27 @@ inner_girder_element_total_num=362
 (F4.0,F10.3,F10.3)
 *cfclos
 
-*get,angle_1,elem,
+
+!!! ------------------------------ Get all info of cables ------------------------------
+*dim,cable_info,array,576,5     ! | No. | cable_num | node_i | node_j | cable_length |
+index=0
+*do,j,0,5
+    *do,i,1,cable_num
+        *do,k,0,7
+            index=index+1
+            current_cable_num=4000+i*8-(7-k)+j*cable_num*8
+            !current_cable_node_i_num=cab_tower(i,j+1)
+            !current_cable_node_j_num=cab_girder(cable_num+1-i+j*2*cable_num,1)
+            cable_info(index,1)=index
+            cable_info(index,2)=current_cable_num
+            *get,cable_info(index,3),elem,current_cable_num,node,1
+            *get,cable_info(index,4),elem,current_cable_num,node,2
+            *get,cable_info(index,5),elem,current_cable_num,leng
+        *enddo
+    *enddo
+*enddo
+
+*cfopen,cable_information,txt
+*vwrite,cable_info(1,1),cable_info(1,2),cable_info(1,3),cable_info(1,4),cable_info(1,5)
+(F4.0,3F6.0,F10.3)
+*cfclos

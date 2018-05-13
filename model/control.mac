@@ -3,17 +3,31 @@
 /rgb,index,80,80,80,13
 /rgb,index,60,60,60,14
 /rgb,index,0,0,0,15
-/input, 'main_parameter', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
-/input, 'element_generator', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
+
+root_path='C:\Users\xuchi\Desktop\JiashaoBridge\model'
+basic_load_path='C:\Users\xuchi\Desktop\JiashaoBridge\model\BasicLoads'
+load_combination_path='C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadCombination'
+
+
+/input, 'main_parameter', 'mac', root_path
+/input, 'element_generator', 'mac', root_path
+!/input, 'cable_solution', 'mac', root_path
+
+!!!-----------------------------------Basic loads-------------------------------------
+!/input, 'base_displacement_1', 'mac', basic_load_path
+!/input, 'base_displacement_2', 'mac', basic_load_path
+!/input, 'temp_rise', 'mac', basic_load_path
+!/input, 'temp_down', 'mac', basic_load_path
+!/input, 'traffic_load', 'mac', basic_load_path
 
 !!!-----------------------Load conditions, solution and results-----------------------
-!/input, 'cable_solution', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
-/input, 'condition1', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadCombination'
+!/input, 'condition1', 'mac', load_combination_path
 
 !!!---------------------------Post process---------------------------------
-/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
+!/input, 'output_images', 'mac', root_path
 
-!/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
-!/input, 'modal', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
-!/input, 'output', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
+!/input, 'output_images', 'mac', root_path
+!/input, 'modal', 'mac', root_path
+!/input, 'output', 'mac', root_path
+
 save

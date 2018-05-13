@@ -114,7 +114,7 @@ type,4
 mat,4
 *do,j,0,5
     *do,i,1,cable_num
-        ! real,1000+i+j*cable_num*2         !!! ord mapping relationship
+        ! real,1000+i+j*cable_num*2         !!! old mapping relationship
         real, 1000+(2*cable_num+4*cable_num*j+1)-(i+j*cable_num*2+cable_num)
         en,4000+i*8-7+j*cable_num*8,cab_tower(i,j+1),cab_girder(cable_num+1-i+j*2*cable_num,1)
         en,4000+i*8-6+j*cable_num*8,cab_tower(i,j+1),cab_girder(cable_num+1-i+j*2*cable_num,2)

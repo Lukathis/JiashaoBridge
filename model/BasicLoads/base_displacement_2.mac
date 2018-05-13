@@ -21,3 +21,5 @@ d,3251,uy,-0.2
 allsel,all
 solve
 
+!!! ------------------Export results-------------------
+/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'

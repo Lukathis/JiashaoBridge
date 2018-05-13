@@ -1,12 +1,8 @@
-!!! Load condition 1
-!!! Dead load + base displacement
+!!! Traffic traverse wind load
 
 /solu
 antype,0
-prefix='Cnd1'
-
-uniform_temp_rise=20
-uniform_temp_down=-20
+prefix='TraffTvsWind'
 
 time,1
 nlgeom,on
@@ -15,11 +11,14 @@ sstif,on
 !!! ------------------Add loads------------------------
 esel,all
 acel,,9.8,,
-tref,0
-bfe,girders,temp,,uniform_temp_rise
-/pbf,temp,,1
-eplot
+
+/input, '1_traffic_traverse_wind_load', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+
+/psf,pres,norm,1            !!! Display loads
+
 allsel,all
+esel,all
+eplot
 solve
 
 !!! ------------------Export results-------------------
