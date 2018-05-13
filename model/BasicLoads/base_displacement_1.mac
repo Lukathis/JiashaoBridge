@@ -12,6 +12,9 @@ sstif,on
 !!! ------------------Add loads------------------------
 esel,all
 acel,,9.8,,
+
+/input, '1_base_displacement', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+
 d,3001,uy,-0.2
 d,3051,uy,-0.2
 d,3101,uy,-0.2

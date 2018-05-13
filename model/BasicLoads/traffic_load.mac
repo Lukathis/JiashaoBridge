@@ -1,12 +1,8 @@
-!!! Base displacement
-!!! +++---
+!!! Traffic load
 
 /solu
 antype,0
 prefix='Traffic'
-
-!!! Loads
-traffic_distributed_load=4200          !!! 10.5kNm*4=42000 N/m
 
 time,1
 nlgeom,on
@@ -16,9 +12,7 @@ sstif,on
 esel,all
 acel,,9.8,,
 
-!!! vehicle load
-sfbeam,girders,1,pres,traffic_distributed_load
-/psf,pres,norm,1                !!! Display loads
+/input, '5_traffic_load', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
 
 allsel,all
 solve

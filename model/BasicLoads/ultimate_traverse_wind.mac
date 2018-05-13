@@ -1,11 +1,8 @@
-
 !!! Ultimate traverse wind load
 
 /solu
 antype,0
 prefix='UltTvsWind'
-
-
 
 time,1
 nlgeom,on
@@ -15,7 +12,7 @@ sstif,on
 esel,all
 acel,,9.8,,
 
-/input, '0_ultimate_traverse_wind_load', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+/input, '7_ultimate_traverse_wind_load', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
 
 /psf,pres,norm,1            !!! Display loads
 
@@ -23,6 +20,6 @@ allsel,all
 esel,all
 eplot
 solve
-
+ 
 !!! ------------------Export results-------------------
 /input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
