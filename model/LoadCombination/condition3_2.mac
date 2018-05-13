@@ -1,0 +1,38 @@
+!!! Load condition 3_2
+!!! Dead load 
+!!!           + base displacement_1 
+!!!           + 0.7*traffic_load 
+!!!           + 0.75*traffic_wind 
+!!!           + 0.8*temp_down 
+
+/solu
+antype,0
+prefix='Cnd3_2'
+
+time,1
+nlgeom,on
+sstif,on
+esel,all
+
+!!! ------------------Add loads------------------------
+!!! Dead load 
+acel,,9.8,,
+
+!!!           + base displacement_1 
+/input, '1_base_displacement', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+
+!!!           + 0.7*traffic_load 
+/input, '5_traffic_load_for_combination_2', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+
+!!!           + 0.75*traffic_wind 
+/input, '6_traffic_traverse_wind_load_for_combination', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+
+!!!           + 0.8*temp_down 
+/input, '3_temp_down_for_combination', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+
+eplot
+allsel,all
+solve
+
+!!! ------------------Export results-------------------
+/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'

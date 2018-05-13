@@ -1,20 +1,23 @@
-!!! Base displacement
-!!! +++---
+!!! Load condition 4
+!!! Dead load + ultimate_wind 
 
 /solu
 antype,0
-prefix='BaseDisp1'
+prefix='Cnd4'
 
 time,1
 nlgeom,on
 sstif,on
+esel,all
 
 !!! ------------------Add loads------------------------
-esel,all
+!!! Dead load 
 acel,,9.8,,
 
-/input, '1_base_displacement', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+!!! Ultimate wind
+/input, '7_ultimate_traverse_wind_load', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
 
+eplot
 allsel,all
 solve
 

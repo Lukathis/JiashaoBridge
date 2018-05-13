@@ -1,0 +1,7 @@
+!!! Loads
+uniform_temp_dowm=-20*0.8
+
+tref,0
+bfe,girders,temp,,uniform_temp_dowm
+/pbf,temp,,1
+eplot

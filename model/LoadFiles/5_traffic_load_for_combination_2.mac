@@ -1,0 +1,7 @@
+!!! Loads
+!!! Combination factor
+traffic_distributed_load=4200*0.4          !!! 10.5kNm*4=42000 N/m
+
+!!! vehicle load
+sfbeam,girders,1,pres,traffic_distributed_load
+/psf,pres,norm,1                !!! Display loads

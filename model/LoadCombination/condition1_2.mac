@@ -1,0 +1,24 @@
+!!! Load condition 1_2
+!!! Dead load + base displacement 2
+
+/solu
+antype,0
+prefix='Cnd1_2'
+
+time,1
+nlgeom,on
+sstif,on
+
+!!! ------------------Add loads------------------------
+esel,all
+acel,,9.8,,
+
+/input, '2_base_displacement', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+/input, '5_traffic_load_for_combination', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+
+eplot
+allsel,all
+solve
+
+!!! ------------------Export results-------------------
+/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'

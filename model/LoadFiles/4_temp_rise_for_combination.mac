@@ -1,0 +1,7 @@
+!!! Loads
+uniform_temp_rise=20*0.8
+
+tref,0
+bfe,girders,temp,,uniform_temp_rise
+/pbf,temp,,1
+eplot

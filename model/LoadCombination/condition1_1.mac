@@ -1,12 +1,9 @@
-!!! Load condition 1
-!!! Dead load + base displacement
+!!! Load condition 1_1
+!!! Dead load + base displacement 1
 
 /solu
 antype,0
-prefix='Cnd1'
-
-uniform_temp_rise=20
-uniform_temp_down=-20
+prefix='Cnd1_1'
 
 time,1
 nlgeom,on
@@ -15,9 +12,10 @@ sstif,on
 !!! ------------------Add loads------------------------
 esel,all
 acel,,9.8,,
-tref,0
-bfe,girders,temp,,uniform_temp_rise
-/pbf,temp,,1
+
+/input, '1_base_displacement', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+/input, '5_traffic_load_for_combination', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+
 eplot
 allsel,all
 solve
