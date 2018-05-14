@@ -1,5 +1,5 @@
 !!! Loads
-uniform_temp_rise=20*0.8
+uniform_temp_rise=10*0.8
 
 tref,0
 bfe,girders,temp,,uniform_temp_rise

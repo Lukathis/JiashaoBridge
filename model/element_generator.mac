@@ -196,11 +196,11 @@ count_1=0
 *enddo
 
 *do,i,1,count_0
-    !d,cons_1(i,1),uz
+    d,cons_1(i,1),uz
     d,cons_1(i,1),uy
     d,cons_1(i,1),rotx
 
-    !d,cons_1(i,2),uz
+    d,cons_1(i,2),uz
     d,cons_1(i,2),uy
     d,cons_1(i,2),rotx
 *enddo
