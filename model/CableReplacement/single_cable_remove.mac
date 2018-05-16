@@ -1,0 +1,35 @@
+prefix='SingCabRmv'
+
+/solu
+antype,0
+nlgeom,on
+sstif,on
+acel,,9.8
+
+time,1
+allsel,all
+esel,all
+eplot
+solve
+save,single_result_01,db
+
+time,2
+ekill,cable_group_1
+allsel,all
+esel,all
+eplot
+solve
+save,single_result_02,db
+
+prefix='SCRr1r2a1'
+time,3
+ealive,cable_group_1
+ekill,cable_group_2
+allsel,all
+esel,all
+eplot
+solve
+save,single_result_03,db
+
+!!! ------------------Export results-------------------
+/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'

@@ -52,10 +52,10 @@ uimp, 5, ex, nuxy, dens, 2.1e11,  0.3,    7850*1      !!! traverse girder
 uimp, 6, ex, nuxy, dens, 2.1e11,  0.3,    7850*0      !!! aux beam 
 
 !!! Secant coefficient of thermal expansion
-mp, alpx, 1,1.2e-5
-mp, alpx, 2,1.2e-5
-mp, alpx, 3,1.2e-5
-mp, alpx, 4,1.2e-5
+mp, alpx, 1,1.2e-05
+mp, alpx, 2,1.2e-05
+mp, alpx, 3,1.2e-05
+mp, alpx, 4,1.2e-05
 
 !!! -------------------------Element section types-------------------------
 !!! Cable elements sectiions

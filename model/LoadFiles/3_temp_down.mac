@@ -1,7 +1,7 @@
 !!! Loads
-uniform_temp_dowm=-10
+uniform_temp_down=-10
 
 tref,0
-bfe,girders,temp,,uniform_temp_dowm
+bfe,girders,temp,,uniform_temp_down
 /pbf,temp,,1
 eplot

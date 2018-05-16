@@ -1,0 +1,15 @@
+!!! Group a set of 8 symmetric cables to a group
+! T1:1,2,3...12|12..3,2,1     T2:13,14,15...24|24...15,14,13
+group_index=0
+*do,j,0,5
+    *do,i,1,cable_num
+        group_index=group_index+1
+        esel,none
+        *do,k,0,7
+            current_cable_num=4000+i*8-(7-k)+j*cable_num*8
+            esel,a,elem,,current_cable_num
+        *enddo
+        group_number=cable_num*j+cable_num*(j+1)-group_index+1
+        cm,CABLE_GROUP_%group_number%,elem
+    *enddo
+*enddo

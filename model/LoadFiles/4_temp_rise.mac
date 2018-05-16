@@ -2,8 +2,6 @@
 uniform_temp_rise=10
 
 tref,0
-bfe,girders,temp,,uniform_temp_rise
-bfe,towers,temp,,uniform_temp_rise
-bfe,cables,temp,,uniform_temp_rise
+bfe,girders,temp,1,uniform_temp_rise
 /pbf,temp,,1
 eplot

@@ -50,3 +50,35 @@ jpeg_name = strcat(prefix, '_Girder_AxialStress')
 default_name=strcat('JiashaoBridge','000')
 jpeg_full_path=strcat(target_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
+
+!!! 4. Bending stress of main girder
+/show,jpeg,,
+esel,s,elem,,girders
+etable,stress_i,smisc,34
+etable,stress_j,smisc,39
+esel,a,elem,,cables
+plls,stress_i,stress_j,0.2
+jpeg_name=strcat(prefix, '_G_BendStress')
+/show,close
+default_name=strcat('JiashaoBridge','000')
+jpeg_full_path=strcat(target_folder_path, jpeg_name)
+/rename,default_name,jpg,,jpeg_full_path,jpg
+
+!!! 5. Combination of axial and bending stress
+/show,jpeg,,
+esel,s,elem,,girders
+etable,ax_stress_i,smisc,31
+etable,ax_stress_j,smisc,36
+etable,zb_stress_i,smisc,35
+etable,zb_stress_j,smisc,40
+esel,a,elem,,cables
+plls,zb_stress_i+ax_stress_i,zb_stress_j+ax_stress_j,0.1
+jpeg_name=strcat(prefix, '_G_CombStress')
+/show,close
+default_name=strcat('JiashaoBridge','000')
+jpeg_full_path=strcat(target_folder_path, jpeg_name)
+/rename,default_name,jpg,,jpeg_full_path,jpg
+
+!etable,comb_i,ls,ax_stress_i,zb_stress_i,ax_stress_j,zb_stress_j
+!*GET,SercStress,SECR,,S,EQV,MAX
+!plls,SercStress,SercStress,0.2

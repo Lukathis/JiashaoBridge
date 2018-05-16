@@ -1,5 +1,5 @@
 !!! Load condition 1_1
-!!! Dead load + base displacement 1
+!!! Dead load + base displacement 1 + traffic load
 
 /solu
 antype,0

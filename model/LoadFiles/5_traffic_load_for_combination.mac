@@ -1,6 +1,6 @@
 !!! Loads
 !!! Combination factor
-traffic_distributed_load=4200*0.7          !!! 10.5kNm*4=42000 N/m
+traffic_distributed_load=42000*0.7          !!! 10.5kNm*4=42000 N/m
 
 !!! vehicle load
 sfbeam,girders,1,pres,traffic_distributed_load
