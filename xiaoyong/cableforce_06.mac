@@ -1,0 +1,15 @@
+!! 斜拉索索力6
+! M14二张索力
+ALLSEL
+! 删除一张索力
+FDELE,Anchorpoint(7,1),ALL
+FDELE,Anchorpoint(7,2),ALL
+
+! 施加二张索力
+F,Anchorpoint(7,1),FX,317315
+F,Anchorpoint(7,1),FY,2278256
+F,Anchorpoint(7,1),FZ,-3879729
+
+F,Anchorpoint(7,2),FX,-331561
+F,Anchorpoint(7,2),FY,2380537
+F,Anchorpoint(7,2),FZ,-4053907

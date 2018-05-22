@@ -1,0 +1,88 @@
+target_folder_path='s1/'
+last_cable=144
+*dim,s1_force,array,144,2
+*dim,s1_stress,array,144,2
+
+/solu
+antype,0
+nlgeom,on
+sstif,on
+acel,,9.8
+
+!!! Schema 1
+time,1
+allsel,all
+esel,all
+eplot
+solve
+
+time,2
+ekill,c1
+allsel,all
+esel,all
+eplot
+solve
+
+*do,step_num,3,last_cable
+    ealive,c%step_num-2%
+    ekill,c%step_num-1%
+    allsel,all
+    esel,all
+    solve
+*enddo
+save,s1,db
+!!! Post process
+finish
+/post1
+etable,ax_force,smisc,1
+etable,ax_stress,ls,1
+*do,step_num,1,last_cable
+    !!! Step step
+    set,step_num
+    etable,refl
+
+    !!! Output result
+    *do,index,1,144
+        esel,s,elem,,c%index%
+        *get,min_num,elem,,num,min
+        !!! This "1" and "2" must refer to ETABLE,STATUS and find out your target etable
+        !!! Starts from 1
+        s1_force(index,1)=min_num
+        *get,s1_force(index,2),etab,1,elem,min_num
+        s1_stress(index,1)=min_num
+        *get,s1_stress(index,2),etab,2,elem,min_num 
+    *enddo
+
+    result_name='cable_force_%step_num%'
+    file_full_path=strcat(target_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    *vwrite,s1_force(1,2)
+    (F20.4)
+    *cfclos
+
+    result_name='cable_stress_%step_num%'
+    file_full_path=strcat(target_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    *vwrite,s1_stress(1,2)
+    (F20.4)
+    *vwrite
+    *cfclos
+
+    /gfile,1200             !!! Resolution
+    /view,1,0,0,1           !!! View angle
+    /dist,1,1200,0          !!! View distance, 0 means absolute distance while 1 means relative
+    /pbc,cp,,0              !!! Turn off the cp
+    /pbc,u,,0               !!! Turn off u
+    /plopt,date,0           !!! Turn off date shown on jpeg images
+    /show,jpeg,,
+    esel,s,elem,,girders
+    etable,myi,smisc,2
+    etable,myj,smisc,15
+    esel,a,elem,,cables
+    plls,myi,myj,0.2
+    jpeg_name = 'G_BM%step_num%'
+    /show,close
+    default_name=strcat('JiashaoBridge','000')
+    jpeg_full_path=strcat(target_folder_path, jpeg_name)
+    /rename,default_name,jpg,,jpeg_full_path,jpg
+*enddo

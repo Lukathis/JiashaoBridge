@@ -1,0 +1,12 @@
+!! 斜拉索索力7
+! M15一张索力
+ALLSEL
+
+! 施加一张索力
+F,Anchorpoint(8,1),FX,132092
+F,Anchorpoint(8,1),FY,938907
+F,Anchorpoint(8,1),FZ,-1669552
+
+F,Anchorpoint(8,2),FX,-132092
+F,Anchorpoint(8,2),FY,938907
+F,Anchorpoint(8,2),FZ,-1669552

@@ -1,0 +1,39 @@
+﻿!!定义右侧的局部坐标系
+FINISH
+/PREP7
+CSYS,0
+WPCSYS,-1
+WPOFFS,11.95
+WPROTA,11.4608
+WPOFFS,5.347
+WPROTA,-4.2914
+WPROTA,,,-90
+CSWPLA,19,0     ! 右侧边腹板局部坐标系
+
+WPROTA,,90
+WPOFFS,,,-1.408
+WPROTA,,-8.3151
+CSWPLA,20,0     ! 右侧顶板局部坐标系
+
+!! 节段数目
+NUM_SEC=8
+
+!! 箱梁镜像及复制
+CSYS,0
+WPCSYS,-1
+ALLSEL
+CMSEL,S,gangliang
+ARSYM,X,ALL
+AGEN,NUM_SEC,ALL,,,,,10.5
+
+
+!! 桥面板镜像及复制
+CSYS,0
+WPCSYS,-1
+ALLSEL
+CMSEL,S,DECK01
+VSYMM,X,ALL
+VGEN,NUM_SEC,ALL,,,,,10.5
+CM,DECK,VOLU
+
+SAVE,extend,db

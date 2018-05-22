@@ -1,0 +1,424 @@
+﻿!! 求解
+FINISH
+/SOLU
+ALLSEL
+CSYS,0
+WPCSYS,-1
+ANTYPE,0
+NROPT,FULL
+
+! 调整视角
+/VIEW,1,1,1,1
+/AUTO,1
+EPLOT
+
+! 索力作用点
+ALLSEL
+*DIM,Anchorpoint,ARRAY,8,2
+*DO,I,1,8
+CSYS,13
+WPCSYS,-1
+Anchorpoint(I,1)=NODE(-8.75-10.5*(I-1),0.751,-0.250)
+CSYS,19
+WPCSYS,-1
+Anchorpoint(I,2)=NODE(8.75+10.5*(I-1),0.751,-0.250)
+*ENDDO
+
+! 弹簧单元模拟拉索刚度
+/INPUT,tanhuang,mac
+
+FINISH
+/SOLU
+! 边界约束
+ALLSEL
+NSEL,R,LOC,Z,0
+D,ALL,ALL
+! 重力
+ACEL,,9.8
+
+
+! 步骤一:桥面吊机前移至12号钢梁
+TIME,1
+! 杀死所有CE
+allsel
+CEDELE,ALL
+! 杀死钢梁13,14,15
+EKILL,gangliang06
+EKILL,gangliang07
+EKILL,gangliang08
+! 杀死桥面板13,14,15
+EKILL,deck06
+EKILL,deck07
+EKILL,deck08
+EKILL,deck09x
+! 杀死预应力束13,14,15
+EKILL,pre06
+EKILL,pre07
+EKILL,pre08
+! 杀死弹簧12,13,14,15
+EKILL,tanhuang05
+EKILL,tanhuang06
+EKILL,tanhuang07
+EKILL,tanhuang08
+! 索力-M12索力一张
+/INPUT,cableforce_01,mac
+! 12号梁段空车荷载
+SFA,qianzhidian05,,PRES,2016000
+SFA,houmaodian05,,PRES,228571.4286
+! ! 混凝土收缩
+! ALLSEL
+! BFE,deck01y,TEMP,1,-1.7200
+! BFE,deck01g,TEMP,1,-6.4483
+! BFE,deck01x,TEMP,1,-4.6877
+! BFE,deck02y,TEMP,1,-1.7200
+! BFE,deck02g,TEMP,1,-6.4483
+! BFE,deck02x,TEMP,1,-4.6877
+! BFE,deck03y,TEMP,1,-0.9380
+! BFE,deck03g,TEMP,1,-3.7183
+! BFE,deck03x,TEMP,1,-0.1316
+! BFE,deck04y,TEMP,1,-0.9380
+! BFE,deck04g,TEMP,1,-3.7183
+! BFE,deck04x,TEMP,1,-0.1316
+! BFE,deck05y,TEMP,1,-0.9380
+! BFE,deck05g,TEMP,1,-3.7183
+! BFE,deck05x,TEMP,1,-0.1316
+! 施加预应力CE
+nsel,none
+CMSEL,S,pre01
+CMSEL,A,pre02
+CMSEL,A,pre03
+CMSEL,A,pre04
+CMSEL,A,pre05
+esll,s
+nsle,s
+vsel,all
+eslv,s
+ceintf,,ux,uy,uz
+! 预应力
+ALLSEL,ALL
+BFL,pre01,TEMP,-(1395e6)/(1.95e11)/(1.2e-5)*0.75
+BFL,pre02,TEMP,-(1395e6)/(1.95e11)/(1.2e-5)*0.75
+BFL,pre03,TEMP,-(1395e6)/(1.95e11)/(1.2e-5)*0.75
+BFL,pre04,TEMP,-(1395e6)/(1.95e11)/(1.2e-5)*0.75
+BFL,pre05,TEMP,-(1395e6)/(1.95e11)/(1.2e-5)*0.75
+ALLSEL
+SOLVE
+SAVE,result_01,db
+
+! 步骤二:第二次张拉12号拉索
+TIME,2
+! M12索力二张
+/INPUT,cableforce_02,mac
+ALLSEL
+SOLVE
+SAVE,result_02,db
+
+
+! 步骤三:桥面吊机-吊装第13号节段钢梁
+TIME,3
+! 12号梁段空车荷载变为满车荷载
+SFADELE,qianzhidian05,,PRES
+SFADELE,houmaodian05,,PRES
+SFA,qianzhidian05,,PRES,9264000
+SFA,houmaodian05,,PRES,-1842857.143
+! 激活弹簧12
+EALIVE,tanhuang05
+D,NDMAX+5,ALL
+D,NDMAX+8+5,ALL
+D,NDMAX+16+5,ALL
+D,NDMAX+24+5,ALL
+D,NDMAX+32+5,ALL
+D,NDMAX+40+5,ALL
+ALLSEL
+SOLVE
+SAVE,result_03,db
+
+
+! 步骤四:第13号节段钢梁结合
+TIME,4
+! 激活13号梁段
+EALIVE,gangliang06
+EALIVE,deck06gy
+! 施加竖向反力
+F,Anchorpoint(6,1),FY,1974000
+F,Anchorpoint(6,2),FY,1974000
+ALLSEL
+SOLVE
+SAVE,result_04,db
+
+
+! 步骤五:第一次张拉第13号斜拉索
+TIME,5
+! 删除竖向反力
+FDELE,Anchorpoint(6,1),FY
+FDELE,Anchorpoint(6,2),FY
+! 12号梁段满车荷载变为空车荷载
+SFADELE,qianzhidian05,,PRES
+SFADELE,houmaodian05,,PRES
+SFA,qianzhidian05,,PRES,2016000
+SFA,houmaodian05,,PRES,228571.4286
+! M13索力一张
+/INPUT,cableforce_03,mac
+ALLSEL
+SOLVE
+SAVE,result_05,db
+
+
+! 步骤六:吊机前移至梁段13
+TIME,6
+! 删除12号梁段空车荷载，13号梁段施加空车荷载
+SFADELE,qianzhidian05,,PRES
+SFADELE,houmaodian05,,PRES
+SFA,qianzhidian06,,PRES,2016000
+SFA,houmaodian06,,PRES,228571.4286
+! 激活弹簧13
+EALIVE,tanhuang06
+D,NDMAX+6,ALL
+D,NDMAX+8+6,ALL
+D,NDMAX+16+6,ALL
+D,NDMAX+24+6,ALL
+D,NDMAX+32+6,ALL
+D,NDMAX+40+6,ALL
+ALLSEL
+SOLVE
+SAVE,result_06,db
+
+! 步骤七:第二次张拉13号梁段拉索
+TIME,7
+! M13索力二张
+/INPUT,cableforce_04,mac
+! 杀死弹簧13
+DDELE,NDMAX+6,ALL
+DDELE,NDMAX+8+6,ALL
+DDELE,NDMAX+16+6,ALL
+DDELE,NDMAX+24+6,ALL
+DDELE,NDMAX+32+6,ALL
+DDELE,NDMAX+40+6,ALL
+EKILL,tanhuang06
+ALLSEL
+SOLVE
+SAVE,result_07,db
+
+! 步骤八:吊装第14号梁段
+TIME,8
+! 13号梁段空车荷载变为满车荷载
+SFADELE,qianzhidian06,,PRES
+SFADELE,houmaodian06,,PRES
+SFA,qianzhidian06,,PRES,9264000
+SFA,houmaodian06,,PRES,-1842857.143
+! 激活弹簧13
+EALIVE,tanhuang06
+D,NDMAX+6,ALL
+D,NDMAX+8+6,ALL
+D,NDMAX+16+6,ALL
+D,NDMAX+24+6,ALL
+D,NDMAX+32+6,ALL
+D,NDMAX+40+6,ALL
+ALLSEL
+SOLVE
+SAVE,result_08,db
+
+! 步骤九:第14号梁段结合
+TIME,9
+! 激活14号梁段
+EALIVE,gangliang07
+EALIVE,deck07gy
+! 施加竖向反力
+F,Anchorpoint(7,1),FY,1974000
+F,Anchorpoint(7,2),FY,1974000
+ALLSEL
+SOLVE
+SAVE,result_09,db
+
+
+! 步骤十:第一次张拉第14号斜拉索
+TIME,10
+! 删除竖向反力
+FDELE,Anchorpoint(7,1),FY
+FDELE,Anchorpoint(7,2),FY
+! 12号梁段满车荷载变为空车荷载
+SFADELE,qianzhidian06,,PRES
+SFADELE,houmaodian06,,PRES
+SFA,qianzhidian06,,PRES,2016000
+SFA,houmaodian06,,PRES,228571.4286
+! M14索力一张
+/INPUT,cableforce_05,mac
+ALLSEL
+SOLVE
+SAVE,result_10,db
+
+
+! 步骤十一:桥面吊机前移至第14号梁段
+TIME,11
+! 删除13号梁段空车荷载，14号梁段施加空车荷载
+SFADELE,qianzhidian06,,PRES
+SFADELE,houmaodian06,,PRES
+SFA,qianzhidian07,,PRES,2016000
+SFA,houmaodian07,,PRES,228571.4286
+! 激活弹簧14
+EALIVE,tanhuang07
+D,NDMAX+7,ALL
+D,NDMAX+8+7,ALL
+D,NDMAX+16+7,ALL
+D,NDMAX+24+7,ALL
+D,NDMAX+32+7,ALL
+D,NDMAX+40+7,ALL
+ALLSEL
+SOLVE
+SAVE,result_11,db
+
+
+! 步骤十二:第二次张拉第14号斜拉索
+TIME,12
+! M14索力二张
+/INPUT,cableforce_06,mac
+! 杀死弹簧14
+DDELE,NDMAX+7,ALL
+DDELE,NDMAX+8+7,ALL
+DDELE,NDMAX+16+7,ALL
+DDELE,NDMAX+24+7,ALL
+DDELE,NDMAX+32+7,ALL
+DDELE,NDMAX+40+7,ALL
+EKILL,tanhuang07
+ALLSEL
+SOLVE
+SAVE,result_12,db
+
+
+! 步骤十三:吊装第15号梁段
+TIME,13
+! 14号梁段空车荷载变为满车荷载
+SFADELE,qianzhidian07,,PRES
+SFADELE,houmaodian07,,PRES
+SFA,qianzhidian07,,PRES,9264000
+SFA,houmaodian07,,PRES,-1842857.143
+! 激活弹簧14
+EALIVE,tanhuang07
+D,NDMAX+7,ALL
+D,NDMAX+8+7,ALL
+D,NDMAX+16+7,ALL
+D,NDMAX+24+7,ALL
+D,NDMAX+32+7,ALL
+D,NDMAX+40+7,ALL
+ALLSEL
+SOLVE
+SAVE,result_13,db
+
+
+!步骤十四：第15号梁段结合
+TIME,14
+! 激活15号梁段
+EALIVE,gangliang08
+EALIVE,deck08gy
+! 施加竖向反力
+F,Anchorpoint(8,1),FY,1974000
+F,Anchorpoint(8,2),FY,1974000
+! ! 已安装桥面板混凝土收缩
+! allsel,all
+! BFE,deck01y,TEMP,1,-0.5486-1.7200
+! BFE,deck01g,TEMP,1,-1.7620-6.4483
+! BFE,deck01x,TEMP,1,-3.8001-4.6877
+! BFE,deck02y,TEMP,1,-0.5486-1.7200
+! BFE,deck02g,TEMP,1,-1.7620-6.4483
+! BFE,deck02x,TEMP,1,-3.8001-4.6877
+! BFE,deck03y,TEMP,1,-0.6272-0.9380
+! BFE,deck03g,TEMP,1,-2.2166-3.7183
+! BFE,deck03x,TEMP,1,-3.4722-0.1316
+! BFE,deck04y,TEMP,1,-0.6272-0.9380
+! BFE,deck04g,TEMP,1,-2.2166-3.7183
+! BFE,deck04x,TEMP,1,-3.4722-0.1316
+! BFE,deck05y,TEMP,1,-0.6272-0.9380
+! BFE,deck05g,TEMP,1,-2.2166-3.7183
+! BFE,deck05x,TEMP,1,-3.4722-0.1316
+! BFE,deck06y,TEMP,1,-0.7353
+! BFE,deck06g,TEMP,1,-3.0241
+! BFE,deck07y,TEMP,1,-0.7353
+! BFE,deck07g,TEMP,1,-3.0241
+! BFE,deck08y,TEMP,1,-0.7353
+! BFE,deck08g,TEMP,1,-3.0241
+ALLSEL
+SOLVE
+SAVE,result_14,db
+
+
+! 步骤十五：浇筑湿接缝混凝土
+TIME,15
+! 激活湿接缝混凝土
+EALIVE,deck06x
+EALIVE,deck07x
+EALIVE,deck08x
+ALLSEL
+SOLVE
+SAVE,result_15,db
+
+
+! ! 步骤十六:湿接缝混凝土养护
+! TIME,16
+! allsel,all
+! ! 混凝土收缩
+! BFE,deck01y,TEMP,1,-0.1361-0.5486-1.7200
+! BFE,deck01g,TEMP,1,-0.4130-1.7620-6.4483
+! BFE,deck01x,TEMP,1,-0.8967-3.8001-4.6877
+! BFE,deck02y,TEMP,1,-0.1361-0.5486-1.7200
+! BFE,deck02g,TEMP,1,-0.4130-1.7620-6.4483
+! BFE,deck02x,TEMP,1,-0.8967-3.8001-4.6877
+! BFE,deck03y,TEMP,1,-0.1548-0.6272-0.9380
+! BFE,deck03g,TEMP,1,-0.5134-2.2166-3.7183
+! BFE,deck03x,TEMP,1,-1.0838-3.4722-0.1316
+! BFE,deck04y,TEMP,1,-0.1548-0.6272-0.9380
+! BFE,deck04g,TEMP,1,-0.5134-2.2166-3.7183
+! BFE,deck04x,TEMP,1,-1.0838-3.4722-0.1316
+! BFE,deck05y,TEMP,1,-0.1548-0.6272-0.9380
+! BFE,deck05g,TEMP,1,-0.5134-2.2166-3.7183
+! BFE,deck05x,TEMP,1,-1.0838-3.4722-0.1316
+! BFE,deck06y,TEMP,1,-0.1845-0.7353
+! BFE,deck06g,TEMP,1,-0.6942-3.0241
+! BFE,deck06x,TEMP,1,-0.1316
+! BFE,deck07y,TEMP,1,-0.1845-0.7353
+! BFE,deck07g,TEMP,1,-0.6942-3.0241
+! BFE,deck07x,TEMP,1,-0.1316
+! BFE,deck08y,TEMP,1,-0.1845-0.7353
+! BFE,deck08g,TEMP,1,-0.6942-3.0241
+! BFE,deck08x,TEMP,1,-0.1316
+! SOLVE
+! SAVE,result_16,db
+
+! 步骤十七：张拉13,14,15三阶段纵向预应力
+TIME,17
+/SOLU
+ALLSEL
+CEDELE,ALL
+EALIVE,pre06
+EALIVE,pre07
+EALIVE,pre08
+nsel,none
+CMSEL,S,pre
+esll,s
+nsle,s
+vsel,all
+eslv
+ceintf,,ux,uy,uz
+allsel,all
+BFL,pre06,TEMP,-(1395e6)/(1.95e11)/(1.2e-5)*0.75
+BFL,pre07,TEMP,-(1395e6)/(1.95e11)/(1.2e-5)*0.75
+BFL,pre08,TEMP,-(1395e6)/(1.95e11)/(1.2e-5)*0.75
+SOLVE
+SAVE,result_17,db
+
+
+! 步骤十八:第一次张拉第15号斜拉索
+TIME,18
+! 删除竖向反力
+allsel,all
+FDELE,Anchorpoint(8,1),FY
+FDELE,Anchorpoint(8,2),FY
+! 14号梁段满车荷载变为空车荷载
+SFADELE,qianzhidian07,,PRES
+SFADELE,houmaodian07,,PRES
+SFA,qianzhidian07,,PRES,2016000
+SFA,houmaodian07,,PRES,228571.4286
+! M15索力一张
+/INPUT,cableforce_07,mac
+ALLSEL
+SOLVE
+SAVE,result_18,db

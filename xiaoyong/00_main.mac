@@ -1,0 +1,12 @@
+/INPUT,01_model,mac
+/INPUT,02_slice,mac
+/INPUT,03_glue_1,mac
+/INPUT,03_glue_2,mac
+/INPUT,04_mesh,mac
+/INPUT,05_deck,mac
+/INPUT,05_deck_mesh,mac
+/INPUT,06_extend,mac
+/INPUT,07_combine,mac
+/INPUT,08_pre,mac
+/INPUT,09_component,mac
+! /INPUT,10_solve,mac

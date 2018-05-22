@@ -1,0 +1,89 @@
+﻿!!!!!
+!!!!!
+!定义预应力束
+!生成节段半桥面预应力束
+FINISH
+/prep7
+csys,0
+wpcsys,-1
+allsel
+ksel,none
+lsel,none
+wpoffs,0,2.8,0  !移动工作平面
+wprota,1.14576,0,0 !旋转工作平面
+cswpla,33
+! 生成1号阶段预应力
+*do,i,1,8,1
+   *get,kpmax,kp,,num,maxd
+   k,kpmax+1,-1.07-0.6*i,0.26,0
+   k,kpmax+2,-1.07-0.6*i,0.26,10.25
+   l,kpmax+1,kpmax+2
+   k,kpmax+3,-10.77-0.4*i,0.26,0
+   k,kpmax+4,-10.77-0.4*i,0.26,10.25
+   l,kpmax+3,kpmax+4
+*enddo
+cm,pre_left,line
+lsymm,x,pre_left
+cm,pre01,line
+! 生成2号标准预应力
+ksel,none
+lsel,none
+*do,i,1,8,1
+   *get,kpmax,kp,,num,maxd
+   k,kpmax+1,-1.07-0.6*i,0.26,10.25
+   k,kpmax+2,-1.07-0.6*i,0.26,20.75
+   l,kpmax+1,kpmax+2
+   k,kpmax+3,-10.77-0.4*i,0.26,10.25
+   k,kpmax+4,-10.77-0.4*i,0.26,20.75
+   l,kpmax+3,kpmax+4
+*enddo
+cm,pre_left02,line
+!生成全桥预应力
+csys,0
+wpcsys,-1
+
+lsymm,x,pre_left02
+cm,pre02,line
+
+lgen,7,pre02,,,,,10.5
+cm,pre,line
+
+
+!定义预应力束属性
+D=15.2/1000
+!PI=acos(-1)
+A0=5.3e-4
+!E3=1.95e11 
+PS=0.75*1860e6
+ISTA=PS/(1.95e11 )
+
+et,3,link180
+mp,ex,3,1.95e11 
+mp,prxy,3,0.3
+mp,alpx,3,1.2e-5
+
+
+! !! 杀死单元后的预应力材料参数
+! mp,ex,13,1.95e5 
+! mp,prxy,13,0.3
+! mp,alpx,13,1.2e-5
+
+
+!r,3,A0
+r,13,A0,0,1
+
+cmsel,s,pre
+latt,3,13,3
+lesize,all,10.5
+lmesh,all
+
+nsel,none
+cmsel,s,pre
+esll,s
+nsle,s
+vsel,all
+eslv,s
+ceintf,,ux,uy,uz
+/pbc,ce,,1
+
+save,pre,db

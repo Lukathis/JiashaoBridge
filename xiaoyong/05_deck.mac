@@ -1,0 +1,355 @@
+﻿FINISH
+/prep7
+csys,0  !选定坐标系为直角坐标系
+/nerr,1,1e6
+wpcsys,-1   !工作平面恢复缺省
+wpstyl,defa   !工作平面恢复默认状态
+/view,1,1,1,1
+/auto,1   !设置自动调整显示大小
+*afun,deg !修改单位制为°，而不是弧度rad
+/replot
+
+!MB05左侧桥面板
+csys,0
+wpcsys,-1  !工作平面恢复缺省
+vsel,none  !不选择所有体
+wpoffs,0,2.8,9  !移动工作平面
+wprota,1.14576,0,0 !旋转工作平面
+wpoffs,-0.2,0,0  !移动工作平面
+blc4,-7.95,0,7.95,0.4,1.25  !通过一个角点坐标和尺寸创建矩形面/体63
+cm,MB0511,volu  !定义元件和组件，相当于组
+!组件的命名为MB05(桥面板种类号)-1(梁段编号)-1(组件序号)
+
+!生成掏空部分
+!cycs,4 !按当前工作平面定义坐标系 !这个命令无效
+!local,11,-0.2,0,2.8,0,1.14576  !生成局部坐标系
+cswpla,21,0 !根据当前工作平面定义局部坐标系
+vsel,none
+ksel,none
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,-7.75,0,0.2
+k,kpmax+2,0,0,0.2
+k,kpmax+3,0,0,1.25
+k,kpmax+4,-7.75,0,1.25
+k,kpmax+5,-7.15,0.12,0.44
+k,kpmax+6,0,0.12,0.44
+k,kpmax+7,0,0.12,1.25
+k,kpmax+8,-7.15,0.12,1.25
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+cm,MB0512,volu
+
+!减去掏空部分,记得要选中体
+cmsel,s,MB0511
+cmsel,a,MB0512
+vsbv,MB0511,MB0512
+cm,MB051,volu
+
+
+!MB06左侧桥面板
+!wpcsys,-1  !工作平面恢复缺省
+vsel,none  !不选择所有体
+wpoffs,-7.95-0.7,0,0  !移动工作平面
+!wprota,1.14576,0,0 !旋转工作平面
+blc4,-7.65,0,7.65,0.4,1.25  !通过一个角点坐标和尺寸创建矩形面/体63
+cm,MB0611,volu  !定义元件和组件，相当于组
+!组件的命名为MB05(桥面板种类号)-1(梁段编号)-1(组件序号)
+
+!生成掏空部分
+!cycs,4 !按当前工作平面定义坐标系 !这个命令无效
+!local,12,0,-0.2-7.95-0.7,2.8,0,1.14576
+cswpla,22,0  !根据当前工作平面定义局部坐标系
+vsel,none
+ksel,none
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,-7.4,0,0.2
+k,kpmax+2,-0.2,0,0.2
+k,kpmax+3,-0.2,0,1.25
+k,kpmax+4,-7.4,0,1.25
+k,kpmax+5,-6.8,0.12,0.44
+k,kpmax+6,-0.8,0.12,0.44
+k,kpmax+7,-0.8,0.12,1.25
+k,kpmax+8,-6.8,0.12,1.25
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+cm,MB0612,volu
+
+!减去掏空部分,记得要选中体
+cmsel,s,MB0611
+cmsel,a,MB0612
+vsbv,MB0611,MB0612
+cm,MB0610,volu
+
+!生成齿块掏空
+wpoffs,-7.65,0,0  !移动工作平面
+cswpla,23,0  !根据当前工作平面定义局部坐标系
+!齿块1号
+vsel,none
+ksel,none
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,0,0,0.1
+k,kpmax+2,0.05,0,0.125
+k,kpmax+3,0.05,0,0.225
+k,kpmax+4,0,0,0.275
+k,kpmax+5,0,0.4,0.1
+k,kpmax+6,0.05,0.4,0.125
+k,kpmax+7,0.05,0.4,0.225
+k,kpmax+8,0,0.4,0.275
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+cm,MB0613,volu
+!齿块2号
+vsel,none
+ksel,none
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,0,0,0.375
+k,kpmax+2,0.05,0,0.425
+k,kpmax+3,0.05,0,0.525
+k,kpmax+4,0,0,0.575
+k,kpmax+5,0,0.4,0.375
+k,kpmax+6,0.05,0.4,0.425
+k,kpmax+7,0.05,0.4,0.525
+k,kpmax+8,0,0.4,0.575
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+cm,MB0614,volu
+!通过坐标轴镜像
+wpoffs,0,0,0.625  !移动工作平面
+cswpla,24,0  !根据当前工作平面定义局部坐标系
+cmsel,s,MB0613
+cmsel,a,MB0614
+cm,MB0615,volu
+vsymm,z,MB0615
+cm,MB0616,volu
+
+!合并齿块形成MB06
+cmsel,s,MB0616
+cmsel,a,MB0610
+vsbv,MB0610,MB0616
+cm,MB061,volu
+
+
+!MB07左侧桥面板
+wpstyl,defa  !工作平面恢复到默认状态
+vsel,none  !不选择所有体
+wpoffs,0,2.8,5.5  !移动工作平面
+wprota,1.14576,0,0 !旋转工作平面
+wpoffs,-0.2,0,0  !移动工作平面
+blc4,-7.95,0,7.95,0.4,3  !通过一个角点坐标和尺寸创建矩形面/体63
+cm,MB0711,volu  !定义元件和组件，相当于组
+!组件的命名为MB05(桥面板种类号)-1(梁段编号)-1(组件序号)
+
+!生成掏空部分
+!cycs,4 !按当前工作平面定义坐标系 !这个命令无效
+!local,11,-0.2,0,2.8,0,1.14576  !生成局部坐标系
+cswpla,25,0 !根据当前工作平面定义局部坐标系
+vsel,none
+ksel,none
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,-7.75,0,0.2
+k,kpmax+2,0,0,0.2
+k,kpmax+3,0,0,2.8
+k,kpmax+4,-7.75,0,2.8
+k,kpmax+5,-7.15,0.12,0.44
+k,kpmax+6,0,0.12,0.44
+k,kpmax+7,0,0.12,2.56
+k,kpmax+8,-7.15,0.12,2.56
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+cm,MB0712,volu
+
+!减去掏空部分,记得要选中体
+cmsel,s,MB0711
+cmsel,a,MB0712
+vsbv,MB0711,MB0712
+cm,MB071,volu
+
+
+!MB08左侧桥面板
+!wpcsys,-1  !工作平面恢复缺省
+vsel,none  !不选择所有体
+wpoffs,-7.95-0.7,0,0  !移动工作平面
+!wprota,1.14576,0,0 !旋转工作平面
+blc4,-7.65,0,7.65,0.4,3  !通过一个角点坐标和尺寸创建矩形面/体63
+cm,MB0811,volu  !定义元件和组件，相当于组
+!组件的命名为MB05(桥面板种类号)-1(梁段编号)-1(组件序号)
+
+!生成掏空部分
+!cycs,4 !按当前工作平面定义坐标系 !这个命令无效
+!local,12,0,-0.2-7.95-0.7,2.8,0,1.14576
+cswpla,26,0  !根据当前工作平面定义局部坐标系
+vsel,none
+ksel,none
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,-7.4,0,0.2
+k,kpmax+2,-0.2,0,0.2
+k,kpmax+3,-0.2,0,2.8
+k,kpmax+4,-7.4,0,2.8
+k,kpmax+5,-6.8,0.12,0.44
+k,kpmax+6,-0.8,0.12,0.44
+k,kpmax+7,-0.8,0.12,2.56
+k,kpmax+8,-6.8,0.12,2.56
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+cm,MB0812,volu
+
+!减去掏空部分,记得要选中体
+cmsel,s,MB0811
+cmsel,a,MB0812
+vsbv,MB0811,MB0812
+cm,MB0810,volu
+
+!生成齿块掏空
+wpoffs,-7.65,0,0  !移动工作平面
+cswpla,27,0  !根据当前工作平面定义局部坐标系
+!齿块1号
+vsel,none
+ksel,none
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,0,0,0.1
+k,kpmax+2,0.05,0,0.125
+k,kpmax+3,0.05,0,0.225
+k,kpmax+4,0,0,0.275
+k,kpmax+5,0,0.4,0.1
+k,kpmax+6,0.05,0.4,0.125
+k,kpmax+7,0.05,0.4,0.225
+k,kpmax+8,0,0.4,0.275
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+cm,MB0813,volu
+!齿块2号
+vsel,none
+ksel,none
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,0,0,0.375
+k,kpmax+2,0.05,0,0.425
+k,kpmax+3,0.05,0,0.525
+k,kpmax+4,0,0,0.575
+k,kpmax+5,0,0.4,0.375
+k,kpmax+6,0.05,0.4,0.425
+k,kpmax+7,0.05,0.4,0.525
+k,kpmax+8,0,0.4,0.575
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+cm,MB0814,volu
+!复制2号齿块
+vgen,4,MB0814,,,,,0.3
+cm,MB0814,volu
+
+!通过坐标轴镜像
+wpoffs,0,0,1.5  !移动工作平面
+cswpla,28,0  !根据当前工作平面定义局部坐标系
+cmsel,s,MB0813
+cmsel,a,MB0814
+cm,MB0815,volu
+vsymm,z,MB0815
+cm,MB0816,volu
+
+!合并齿块形成MB08
+cmsel,s,MB0816
+cmsel,a,MB0810
+vsbv,MB0810,MB0816
+cm,MB081,volu
+
+!复制生成节段桥面板
+wpstyl,defa  !工作平面恢复到默认状态
+wpoffs,0,0,5.25 !移动到节段中央
+cswpla,29,0
+cmsel,s,MB051
+cmsel,a,MB061
+cmsel,a,MB071
+cmsel,a,MB081
+cm,DECK011,volu
+!deck011的命名方式为01(节段编号)-1(序号)
+vsymm,z,DECK011
+cm,DECK012,volu
+!vsymm,x,DECK012
+cm,DECK01Y,volu
+!Y表示预制，X表示工地现浇，G表示工厂现浇
+
+!现浇缝
+wpstyl,defa !恢复默认
+wpoffs,0,2.8,0
+cswpla,30,0
+vsel,none
+ksel,none
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,0,0,0
+k,kpmax+2,0,0.4,0
+k,kpmax+3,0,0.4,10.5
+k,kpmax+4,0,0,10.5
+wprota,1.14576,0,0 !旋转工作平面
+cswpla,31,0
+k,kpmax+5,-17,0,0
+k,kpmax+6,-17,0.4,0
+k,kpmax+7,-17,0.4,10.5
+k,kpmax+8,-17,0,10.5
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+cm,DECK013,volu
+
+csys,0
+wpcsys,-1  !工作平面恢复缺省
+vsel,none  !不选择所有体
+csys,21 !激活mb05的坐标系
+vsel,none
+ksel,none
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,-7.75,0,0.2
+k,kpmax+2,0,0,0.2
+k,kpmax+3,0,0,1.5
+k,kpmax+4,-7.75,0,1.5
+k,kpmax+5,-7.15,0.12,0.44
+k,kpmax+6,0,0.12,0.44
+k,kpmax+7,0,0.12,1.5
+k,kpmax+8,-7.15,0.12,1.5
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+
+csys,22 !激活mb06的坐标系
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,-7.4,0,0.2
+k,kpmax+2,-0.2,0,0.2
+k,kpmax+3,-0.2,0,1.5
+k,kpmax+4,-7.4,0,1.5
+k,kpmax+5,-6.8,0.12,0.44
+k,kpmax+6,-0.8,0.12,0.44
+k,kpmax+7,-0.8,0.12,1.5
+k,kpmax+8,-6.8,0.12,1.5
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+
+csys,25 !激活mb07的坐标系
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,-7.75,0,0.2
+k,kpmax+2,0,0,0.2
+k,kpmax+3,0,0,2.8
+k,kpmax+4,-7.75,0,2.8
+k,kpmax+5,-7.15,0.12,0.44
+k,kpmax+6,0,0.12,0.44
+k,kpmax+7,0,0.12,2.56
+k,kpmax+8,-7.15,0.12,2.56
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+
+csys,26 !激活mb08的坐标系
+*get,kpmax,kp,,num,maxd
+k,kpmax+1,-7.4,0,0.2
+k,kpmax+2,-0.2,0,0.2
+k,kpmax+3,-0.2,0,2.8
+k,kpmax+4,-7.4,0,2.8
+k,kpmax+5,-6.8,0.12,0.44
+k,kpmax+6,-0.8,0.12,0.44
+k,kpmax+7,-0.8,0.12,2.56
+k,kpmax+8,-6.8,0.12,2.56
+v,kpmax+1,kpmax+2,kpmax+3,kpmax+4,kpmax+5,kpmax+6,kpmax+7,kpmax+8
+
+cm,taokong1,volu
+
+csys,29 !激活节段坐标系
+vsymm,z,taokong1
+cm,taokong2,volu
+
+cmsel,s,DECK013
+cmsel,a,taokong2
+vsbv,DECK013,taokong2
+cm,DECK014,volu
+!vsymm,x,DECK014
+!cm,DECK015,volu
+cmsel,s,DECK014
+cmsel,a,DECK01Y
+vsbv,DECK014,DECK01Y,,,keep
+cm,DECK016,volu
+cmsel,s,DECK016
+cmsel,u,DECK01Y
+cm,DECK016,volu
+
+save,deck,db

@@ -5,7 +5,7 @@ UltTvsWind_tower_distributed_load=-23010.90        ! N/m
 UltTvsWind_cable_distributed_load=54.21            ! N/m
 
 ! Load on girders
-sfbeam,girders,2,pres,UltTvsWind_girder_distributed_load
+sfbeam,girders,2,pres,10000
 
 ! Load on towers
 sfbeam,towers,2,pres,UltTvsWind_tower_distributed_load

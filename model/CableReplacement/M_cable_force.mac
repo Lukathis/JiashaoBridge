@@ -1,0 +1,28 @@
+!!! Output result
+    etable,refl
+    etable,ax_force,smisc,1
+    etable,ax_stress,ls,1
+
+    *do,index,1,144
+        esel,s,elem,,c%index%
+        *get,min_num,elem,,num,min
+        !!! This "1" and "2" must refer to ETABLE,STATUS and find out your target etable
+        !!! Starts from 1
+        s1_force(index,1)=min_num
+        *get,s1_force(index,2),etab,1,elem,min_num
+        s1_stress(index,1)=min_num
+        *get,s1_stress(index,2),etab,2,elem,min_num 
+    *enddo
+
+    result_name='%folder%/cable_force_%prefix%'
+    *cfopen,result_name,txt
+    *vwrite,s1_force(1,2)
+    (F20.4)
+    *cfclos
+
+    result_name='%folder%/cable_stress_%prefix%'
+    *cfopen,result_name,txt
+    *vwrite,s1_stress(1,2)
+    (F20.4)
+    *vwrite
+    *cfclos

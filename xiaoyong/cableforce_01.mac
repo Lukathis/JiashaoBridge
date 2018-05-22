@@ -1,0 +1,50 @@
+!! 斜拉索索力1
+! 初始状态:M08,M09,M10,M11二张索力,M12一张索力
+CSYS,0
+WPCSYS,-1
+ALLSEL
+
+! M08节段二张索力
+F,Anchorpoint(1,1),FX,286325
+F,Anchorpoint(1,1),FY,2185554
+F,Anchorpoint(1,1),FZ,-2592956
+
+F,Anchorpoint(1,2),FX,-287450
+F,Anchorpoint(1,2),FY,2194141
+F,Anchorpoint(1,2),FZ,-2603144
+
+! M09节段二张索力
+F,Anchorpoint(2,1),FX,307498
+F,Anchorpoint(2,1),FY,2324739
+F,Anchorpoint(2,1),FZ,-2981295
+
+F,Anchorpoint(2,2),FX,-305034
+F,Anchorpoint(2,2),FY,2306110
+F,Anchorpoint(2,2),FZ,-2957405
+
+! M10节段二张索力
+F,Anchorpoint(3,1),FX,312425
+F,Anchorpoint(3,1),FY,2330993
+F,Anchorpoint(3,1),FZ,-3207970
+
+F,Anchorpoint(3,2),FX,-313358
+F,Anchorpoint(3,2),FY,2337959
+F,Anchorpoint(3,2),FZ,-3217557
+
+! M11节段二张索力
+F,Anchorpoint(4,1),FX,318700
+F,Anchorpoint(4,1),FY,2347648
+F,Anchorpoint(4,1),FZ,-3443584
+
+F,Anchorpoint(4,2),FX,-321362
+F,Anchorpoint(4,2),FY,2367260
+F,Anchorpoint(4,2),FZ,-3472352
+
+! M12节段一张索力
+F,Anchorpoint(5,1),FX,133008
+F,Anchorpoint(5,1),FY,971530
+F,Anchorpoint(5,1),FZ,-1504678
+
+F,Anchorpoint(5,2),FX,-133008
+F,Anchorpoint(5,2),FY,971530
+F,Anchorpoint(5,2),FZ,-1504678

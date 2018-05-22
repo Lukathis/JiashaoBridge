@@ -67,12 +67,10 @@ jpeg_full_path=strcat(target_folder_path, jpeg_name)
 !!! 5. Combination of axial and bending stress
 /show,jpeg,,
 esel,s,elem,,girders
-etable,ax_stress_i,smisc,31
-etable,ax_stress_j,smisc,36
-etable,zb_stress_i,smisc,35
-etable,zb_stress_j,smisc,40
+sadd,comb_i,stress_i,ax_stress_i
+sadd,comb_j,stress_j,ax_stress_j
 esel,a,elem,,cables
-plls,zb_stress_i+ax_stress_i,zb_stress_j+ax_stress_j,0.1
+plls,comb_i,comb_j,0.1
 jpeg_name=strcat(prefix, '_G_CombStress')
 /show,close
 default_name=strcat('JiashaoBridge','000')

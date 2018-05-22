@@ -1,0 +1,258 @@
+﻿/PREP7
+ALLSEL,ALL
+!切分现浇段
+wpstyl,defa
+wpoffs,0,2.8,10.25  !移动工作平面
+!wprota,1.14576,0,0 !旋转工作平面
+!wpoffs,-0.2,0,0  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,-1.25  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,-0.25  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,-0.25  !移动工作平面
+vsbw,all
+
+*do,i,1,6,1
+wpoffs,0,0,-0.5  !移动工作平面
+vsbw,all
+*enddo
+
+wpoffs,0,0,-0.25  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,-0.25  !移动工作平面
+vsbw,all
+
+*do,i,1,6,1
+wpoffs,0,0,-0.5  !移动工作平面
+vsbw,all
+*enddo
+
+wpoffs,0,0,-0.25  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,-0.25  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,-1.25  !移动工作平面
+vsbw,all
+
+!左侧
+wprota,,,90
+wprota,,1.14576
+!
+!wpoffs,0,0,0.2  !移动工作平面
+!vsbw,all
+!
+!wpoffs,0,0,7.95  !移动工作平面
+!vsbw,all
+!
+!wpoffs,0,0,0.35  !移动工作平面
+!vsbw,all
+!
+!wpoffs,0,0,0.35  !移动工作平面
+!vsbw,all
+!
+!wpoffs,0,0,7.60  !移动工作平面
+!vsbw,all
+!
+!wpoffs,0,0,0.05  !移动工作平面
+!vsbw,all
+
+!左侧
+!wpoffs,0,0,-16.5  !移动工作平面
+wprota,,-1.14576
+wprota,,,180
+wprota,,1.14576
+wpoffs,0,0,0.2  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,1.47  !移动工作平面
+vsbw,all
+
+*do,i,1,7,1
+wpoffs,0,0,0.6  !移动工作平面
+vsbw,all
+*enddo
+
+wpoffs,0,0,0.88  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.5  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.85  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.05  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.35  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.35  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.05  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,4.25  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.7  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.9  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.5  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,1.15  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.05  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.05  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,0.20  !移动工作平面
+vsbw,all
+
+wpoffs,0,0,-16.5  !移动工作平面
+wpoffs,0,0,11.17
+vsbw,all
+*do,i,1,7,1
+wpoffs,0,0,0.4
+vsbw,all
+*enddo
+
+csys,0
+wpcsys,-1
+allsel,all
+/replot
+
+vsel,none
+wpstyl,defa
+wpoffs,0,2.8,0  !移动工作平面
+wprota,,,-90
+wprota,,1.14576
+wprota,,90
+wpoffs,,,-0.12
+cswpla,32,0
+!cmsel,s,DECK01Y
+vsel,s,loc,y,0,17
+cm,DECK01Y_l,volu
+vsbw,DECK01Y_l
+!vsel,r,loc,z,0,1
+!cmsel,a,DECK01Y_down
+!cm,DECK01Y_down,volu
+vsel,s,loc,z,0,0.12
+!vsel,u,loc,x,-0,-0.25
+vsel,u,loc,x,1.5,2
+vsel,u,loc,x,5,5.5
+vsel,u,loc,x,8.5,9
+!vsel,u,loc,x,10.25,10.5
+vsel,u,loc,y,0,0.2
+vsel,u,loc,y,8.15,8.85
+vsel,u,loc,y,16.5,17
+cm,DECK01_buguize,volu
+vsel,s,loc,y,16.45,16.5
+vsel,u,loc,x,0,0.25
+vsel,u,loc,x,1.5,2
+vsel,u,loc,x,5,5.5
+vsel,u,loc,x,8.5,9
+vsel,u,loc,x,10.25,10.5
+cmsel,a,DECK01_buguize
+cm,DECK01_buguize,volu
+
+!定义工厂湿接缝和现场湿接缝
+csys,0
+wpcsys,-1
+vsel,none
+vsel,s,loc,z,0,0.25
+vsel,a,loc,z,10.25,10.5
+cm,DECK01X,volu   !X为现场
+
+vsel,none
+vsel,s,loc,z,1.5,2
+vsel,a,loc,z,5,5.5
+vsel,a,loc,z,8.5,9
+vsel,a,loc,x,-0.2,0
+vsel,a,loc,x,-8.85,-8.15
+vsel,a,loc,x,-17,-16.5
+vsel,u,loc,z,0,0.25
+vsel,u,loc,z,10.25,10.5
+cm,DECK01G,volu   !G为工厂
+
+vsel,none
+vsel,s,loc,z,0,10.5
+cm,DECK01,volu
+cmsel,u,DECK01X
+cmsel,u,DECK01G
+cm,DECK01Y,volu   !Y为预制
+
+cmsel,s,DECK01
+cmsel,u,DECK01_buguize
+cm,DECK01_guize,volu
+
+vsel,none
+vsel,s,loc,x,-16.45,0
+cm,DECK01_guize01,volu
+vsel,none
+vsel,s,loc,x,-17,-16.5
+cm,DECK01_guize02,volu
+vsel,none
+cmsel,s,DECK01G
+vsel,r,loc,x,-16.45,-16.5
+cm,DECK01_guize03,volu
+vsel,none
+vsel,s,loc,x,-0.2,0
+cm,DECK01_guize04,volu
+vsel,none
+cmsel,s,DECK01Y
+cmsel,u,DECK01_buguize
+cm,DECK01_guize05,volu
+
+allsel,all
+/replot
+csys,0
+wpcsys,-1
+
+!定义混凝土属性，划分网格
+et,2,solid45
+mp,ex,2,5.49e10    
+mp,prxy,2,0.2   
+mp,alpx,2,1.0E-5 
+mp,dens,2,2.6e3
+
+! !! 杀死单元后的混凝土材料参数
+! mp,ex,12,5.49e4    
+! mp,prxy,12,0.2   
+! mp,alpx,12,1.0E-5 
+! mp,dens,12,0
+
+
+vatt,2,,2
+desize,,,,,,,0.2
+lesize,all,0.2
+esize,0.2
+smrtsize,8
+mshape,0,3D
+mshkey,2
+vsweep,DECK01X
+vsweep,DECK01_guize01
+vsweep,DECK01_guize02
+vsweep,DECK01_guize03
+!vmesh,DECK01_guize04
+
+mshape,1,3D
+mshkey,0
+vmesh,all
+
+SAVE,deck_mesh,db

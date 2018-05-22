@@ -1,0 +1,12 @@
+!! 斜拉索索力3
+! M13一张索力
+ALLSEL
+
+! 施加一张索力
+F,Anchorpoint(6,1),FX,130378
+F,Anchorpoint(6,1),FY,943760
+F,Anchorpoint(6,1),FZ,-1536614
+
+F,Anchorpoint(6,2),FX,-130378
+F,Anchorpoint(6,2),FY,943760
+F,Anchorpoint(6,2),FZ,-1536614
