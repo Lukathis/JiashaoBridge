@@ -15,11 +15,11 @@ esel,all
 acel,,9.8,,
 
 !!! Ultimate wind
-/input, '7_ultimate_traverse_wind_load', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+/input, '7_ultimate_traverse_wind_load', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadFiles'
 
 eplot
 allsel,all
 solve
 
 !!! ------------------Export results-------------------
-/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
+/input, 'output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'

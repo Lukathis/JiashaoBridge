@@ -12,10 +12,10 @@ sstif,on
 esel,all
 acel,,9.8,,
 
-/input, '5_traffic_load', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+/input, '5_traffic_load', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadFiles'
 
 allsel,all
 solve
 
 !!! ------------------Export results-------------------
-/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
+/input, 'output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'

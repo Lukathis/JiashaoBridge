@@ -1,5 +1,5 @@
 target_folder_path='s1/'
-last_cable=144
+total_steps=4
 *dim,s1_force,array,144,2
 *dim,s1_stress,array,144,2
 
@@ -17,15 +17,20 @@ eplot
 solve
 
 time,2
-ekill,c1
+ekill,c1,
+ekill,c144
 allsel,all
 esel,all
 eplot
 solve
 
-*do,step_num,3,last_cable
+*do,step_num,3,total_steps
     ealive,c%step_num-2%
     ekill,c%step_num-1%
+
+    ealive,c%145-(step_num-2)%
+    ekill,c%145-(step_num-1)%
+
     allsel,all
     esel,all
     solve
@@ -36,7 +41,7 @@ finish
 /post1
 etable,ax_force,smisc,1
 etable,ax_stress,ls,1
-*do,step_num,1,last_cable
+*do,step_num,1,total_steps
     !!! Step step
     set,step_num
     etable,refl

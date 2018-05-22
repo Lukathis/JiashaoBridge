@@ -13,12 +13,12 @@ sstif,on
 esel,all
 acel,,9.8,,
 
-/input, '2_base_displacement', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
-/input, '5_traffic_load_for_combination', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+/input, '2_base_displacement', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadFiles'
+/input, '5_traffic_load_for_combination', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadFiles'
 
 eplot
 allsel,all
 solve
 
 !!! ------------------Export results-------------------
-/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
+/input, 'output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'

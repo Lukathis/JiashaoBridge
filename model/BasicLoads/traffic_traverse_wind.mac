@@ -12,7 +12,7 @@ sstif,on
 esel,all
 acel,,9.8,,
 
-/input, '6_traffic_traverse_wind_load', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model\LoadFiles'
+/input, '6_traffic_traverse_wind_load', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadFiles'
 
 /psf,pres,norm,1            !!! Display loads
 
@@ -22,4 +22,4 @@ eplot
 solve
 
 !!! ------------------Export results-------------------
-/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
+/input, 'output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'

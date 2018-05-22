@@ -15,4 +15,4 @@ allsel,all
 solve
 
 !!! ------------------Export results-------------------
-/input, 'output_images', 'mac', 'C:\Users\xuchi\Desktop\JiashaoBridge\model'
+/input, 'output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'

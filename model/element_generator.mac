@@ -218,5 +218,5 @@ count_1=0
 !f,11,fy,-750000
 !f,12,fy,-750000
 
-save,Jiashao,db
-resume,Jiashao,db
+!save,Jiashao,db
+!resume,Jiashao,db

@@ -1,0 +1,47 @@
+/prep7
+/rgb,index,100,100,100,0
+/rgb,index,80,80,80,13
+/rgb,index,60,60,60,14
+/rgb,index,0,0,0,15
+
+/input, 'main_parameter', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'
+/input, 'element_generator', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'
+/input, 'cm_cables', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'
+
+!!!----------------------------Basic loads--------------------------------------------
+!/input, 'cable_solution', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'
+!/input, 'base_displacement_1', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\BasicLoads'
+!/input, 'base_displacement_2', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\BasicLoads'
+!/input, 'traffic_load', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\BasicLoads'
+!/input, 'half_traffic_load', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\BasicLoads'
+!/input, 'temp_rise', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\BasicLoads'
+!/input, 'temp_down', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\BasicLoads'
+!/input, 'traffic_traverse_wind', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\BasicLoads'
+!/input, 'ultimate_traverse_wind', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\BasicLoads'
+
+!!!-----------------------Load combinations, solution and results-----------------------
+!/input, 'condition1_1', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadCombination'
+!/input, 'condition1_2', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadCombination'
+!/input, 'condition2_1', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadCombination'
+!/input, 'condition2_2', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadCombination'
+!/input, 'condition3_1', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadCombination'
+!/input, 'condition3_2', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadCombination'
+!/input, 'condition4', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadCombination'
+!/input, 'condition2_3', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\LoadCombination'
+
+!!!----------------------------- Single Cable replacement -----------------------------
+!/input, 'single_cable_remove', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+!/input, 'single_cable_remove_output_res', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+
+!!!----------------------------- Cable replacement Schemas -----------------------------
+/input, 'schema1', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+
+!!!---------------------------Post process---------------------------------
+!/input, 'output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'
+
+!/input, 'output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'
+!/input, 'modal', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'
+!/input, 'output', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'
+!/input, 'result_writter', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'
+!/input, 'cable_result', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model' 
+save
