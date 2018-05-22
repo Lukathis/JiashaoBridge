@@ -212,5 +212,11 @@ count_1=0
     cp, i*3-0, uy, 7+50*(i-1)+3000, cons_2(i*2-1,1), cons_2(i*2,1), cons_2(i*2-1,2), cons_2(i*2,2)
 *enddo
 
+! weight
+!f,1511,fy,-750000
+!f,1512,fy,-750000
+!f,11,fy,-750000
+!f,12,fy,-750000
+
 save,Jiashao,db
 resume,Jiashao,db

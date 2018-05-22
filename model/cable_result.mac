@@ -1,0 +1,31 @@
+etable,ax_force,smisc,1
+plls,ax_force,ax_force,0.01
+
+etable,ax_stress,ls,1
+plls,ax_stress,ax_stress,0.01
+
+*dim,cable_force,array,144,2
+*dim,cable_stress,array,144,2
+*do,index,1,144
+    esel,s,elem,,c%index%
+    *get,min_num,elem,,num,min
+    cable_force(index,1)=min_num
+    !!! This 10 must refer to ETABLE,STATUS and find out your target etable
+    !!! Starts from 1
+    *get,cable_force(index,2),etab,10,elem,min_num
+
+    cable_stress(index,1)=min_num
+    *get,cable_stress(index,2),etab,5,elem,min_num 
+*enddo
+
+
+*cfopen,strcat('cable_force',prefix),txt
+*vwrite,cable_force(1,1),cable_force(1,2)
+(F8.0,F20.4)
+*cfclos
+
+*cfopen,strcat('cable_stress', prefix),txt
+*vwrite,cable_stress(1,1),cable_stress(1,2)
+(F8.0,F20.4)
+*vwrite
+*cfclos
