@@ -44,7 +44,7 @@ et, 5, beam188              !!! traverse girder
 et, 6, beam4                !!! aux girder      --- beam4?
 
 !!! ----------------------Element material properties-------------------------
-uimp, 1, ex, nuxy, dens, 2.1e11,  0.3,    7850*1.54   !!! main girder --> the factor means secondary dead load
+uimp, 1, ex, nuxy, dens, 2.1e11,  0.3,    7850*1.52   !!! main girder --> the factor means secondary dead load
 uimp, 2, ex, nuxy, dens, 2.1e11,  0.3,    0           !!! rigid constrain
 uimp, 3, ex, nuxy, dens, 3.45e10, 0.1667, 2680        !!! main tower
 uimp, 4, ex, nuxy, dens, 1.95e11, 0.3,    7850*1.08   !!! main cable
