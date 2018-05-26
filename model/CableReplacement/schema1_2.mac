@@ -1,4 +1,6 @@
-target_folder_path='s1/'
+!!! 划分更细致，每一步只做kill或alive
+!!! 结果：没有区别
+target_folder_path='s1_2/'
 *dim,s1_force,array,144,2
 *dim,s1_stress,array,144,2
 
@@ -15,33 +17,23 @@ esel,all
 eplot
 solve
 
-time,2
-ekill,c1,
-ekill,c144
-allsel,all
-esel,all
-eplot
-solve
+*do,step_num,1,72
+    current_index=step_num*2
+    time,current_index
+    ekill,c%step_num%
+    ekill,c%145-step_num%
+    allsel,all
+    esel,all
+    solve
 
-*do,step_num,3,73
-    ealive,c%step_num-2%
-    ekill,c%step_num-1%
-
-    ealive,c%145-(step_num-2)%
-    ekill,c%145-(step_num-1)%
-
+    time,(current_index+1)
+    ealive,c%step_num%
+    ealive,c%145-step_num%
     allsel,all
     esel,all
     solve
 *enddo
-
-time,74
-ealive,c72
-ealive,c73
-allsel,all
-esel,all
-eplot
-solve
+!!! 1+72*2=145 time totally
 
 save,s1,db
 !!! Post process
@@ -49,7 +41,7 @@ finish
 /post1
 etable,ax_force,smisc,1
 etable,ax_stress,ls,1
-*do,step_num,1,74
+*do,step_num,1,145
     !!! Step step
     set,step_num
     etable,refl
