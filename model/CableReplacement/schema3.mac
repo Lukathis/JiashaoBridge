@@ -1,0 +1,68 @@
+!!! 换索顺序由边向中，每个索塔从长索向短索
+
+!########################## MODIFY ##########################
+file_folder_path='s3/'
+final_step_num=38
+!########################## MODIFY ##########################
+*dim,cable_reals_before_replacement,table,cable_real_num,2,1
+*tread,cable_reals_before_replacement,cable_reals_before_replacement,real,C:\Users\xuhui\Desktop\JiashaoBridge\model\Parameter\cable_reals
+
+*do,i,1,cable_real_num
+    r,1000+i,cable_reals_before_replacement(i,1)/1000000,cable_reals_before_replacement(i,2)
+*enddo
+*dim,cable_reals_comp_stat,table,cable_real_num,2,1
+ *tread,cable_reals_comp_stat,cable_reals_comp_stat,real,C:\Users\xuhui\Desktop\JiashaoBridge\model\Parameter\cable_reals
+
+
+/solu
+antype,0
+nlgeom,on
+sstif,on
+acel,,9.8
+
+!!! Schema 3
+!!! --------------------------------------- TIME ---------------------------------------
+time,1$allsel,all$esel,all$solve
+time,2$ekill,c1$ekill,c24$ekill,c121$ekill,c144$allsel,all$esel,all$solve
+time,3$ekill,c2$ekill,c23$ekill,c122$ekill,c143$ealive,c1$ealive,c24$ealive,c121$ealive,c144$allsel,all$esel,all$solve
+time,4$ekill,c3$ekill,c22$ekill,c123$ekill,c142$ealive,c2$ealive,c23$ealive,c122$ealive,c143$allsel,all$esel,all$solve
+time,5$ekill,c4$ekill,c21$ekill,c124$ekill,c141$ealive,c3$ealive,c22$ealive,c123$ealive,c142$allsel,all$esel,all$solve
+time,6$ekill,c5$ekill,c20$ekill,c125$ekill,c140$ealive,c4$ealive,c21$ealive,c124$ealive,c141$allsel,all$esel,all$solve
+time,7$ekill,c6$ekill,c19$ekill,c126$ekill,c139$ealive,c5$ealive,c20$ealive,c125$ealive,c140$allsel,all$esel,all$solve
+time,8$ekill,c7$ekill,c18$ekill,c127$ekill,c138$ealive,c6$ealive,c19$ealive,c126$ealive,c139$allsel,all$esel,all$solve
+time,9$ekill,c8$ekill,c17$ekill,c128$ekill,c137$ealive,c7$ealive,c18$ealive,c127$ealive,c138$allsel,all$esel,all$solve
+time,10$ekill,c9$ekill,c16$ekill,c129$ekill,c136$ealive,c8$ealive,c17$ealive,c128$ealive,c137$allsel,all$esel,all$solve
+time,11$ekill,c10$ekill,c15$ekill,c130$ekill,c135$ealive,c9$ealive,c16$ealive,c129$ealive,c136$allsel,all$esel,all$solve
+time,12$ekill,c11$ekill,c14$ekill,c131$ekill,c134$ealive,c10$ealive,c15$ealive,c130$ealive,c135$allsel,all$esel,all$solve
+time,13$ekill,c12$ekill,c13$ekill,c132$ekill,c133$ealive,c11$ealive,c14$ealive,c131$ealive,c134$allsel,all$esel,all$solve
+time,14$ekill,c25$ekill,c48$ekill,c97$ekill,c120$ealive,c12$ealive,c13$ealive,c132$ealive,c133$allsel,all$esel,all$solve
+time,15$ekill,c26$ekill,c47$ekill,c98$ekill,c119$ealive,c25$ealive,c48$ealive,c97$ealive,c120$allsel,all$esel,all$solve
+time,16$ekill,c27$ekill,c46$ekill,c99$ekill,c118$ealive,c26$ealive,c47$ealive,c98$ealive,c119$allsel,all$esel,all$solve
+time,17$ekill,c28$ekill,c45$ekill,c100$ekill,c117$ealive,c27$ealive,c46$ealive,c99$ealive,c118$allsel,all$esel,all$solve
+time,18$ekill,c29$ekill,c44$ekill,c101$ekill,c116$ealive,c28$ealive,c45$ealive,c100$ealive,c117$allsel,all$esel,all$solve
+time,19$ekill,c30$ekill,c43$ekill,c102$ekill,c115$ealive,c29$ealive,c44$ealive,c101$ealive,c116$allsel,all$esel,all$solve
+time,20$ekill,c31$ekill,c42$ekill,c103$ekill,c114$ealive,c30$ealive,c43$ealive,c102$ealive,c115$allsel,all$esel,all$solve
+time,21$ekill,c32$ekill,c41$ekill,c104$ekill,c113$ealive,c31$ealive,c42$ealive,c103$ealive,c114$allsel,all$esel,all$solve
+time,22$ekill,c33$ekill,c40$ekill,c105$ekill,c112$ealive,c32$ealive,c41$ealive,c104$ealive,c113$allsel,all$esel,all$solve
+time,23$ekill,c34$ekill,c39$ekill,c106$ekill,c111$ealive,c33$ealive,c40$ealive,c105$ealive,c112$allsel,all$esel,all$solve
+time,24$ekill,c35$ekill,c38$ekill,c107$ekill,c110$ealive,c34$ealive,c39$ealive,c106$ealive,c111$allsel,all$esel,all$solve
+time,25$ekill,c36$ekill,c37$ekill,c108$ekill,c109$ealive,c35$ealive,c38$ealive,c107$ealive,c110$allsel,all$esel,all$solve
+time,26$ekill,c49$ekill,c72$ekill,c73$ekill,c96$ealive,c36$ealive,c37$ealive,c108$ealive,c109$allsel,all$esel,all$solve
+time,27$ekill,c50$ekill,c71$ekill,c74$ekill,c95$ealive,c49$ealive,c72$ealive,c73$ealive,c96$allsel,all$esel,all$solve
+time,28$ekill,c51$ekill,c70$ekill,c75$ekill,c94$ealive,c50$ealive,c71$ealive,c74$ealive,c95$allsel,all$esel,all$solve
+time,29$ekill,c52$ekill,c69$ekill,c76$ekill,c93$ealive,c51$ealive,c70$ealive,c75$ealive,c94$allsel,all$esel,all$solve
+time,30$ekill,c53$ekill,c68$ekill,c77$ekill,c92$ealive,c52$ealive,c69$ealive,c76$ealive,c93$allsel,all$esel,all$solve
+time,31$ekill,c54$ekill,c67$ekill,c78$ekill,c91$ealive,c53$ealive,c68$ealive,c77$ealive,c92$allsel,all$esel,all$solve
+time,32$ekill,c55$ekill,c66$ekill,c79$ekill,c90$ealive,c54$ealive,c67$ealive,c78$ealive,c91$allsel,all$esel,all$solve
+time,33$ekill,c56$ekill,c65$ekill,c80$ekill,c89$ealive,c55$ealive,c66$ealive,c79$ealive,c90$allsel,all$esel,all$solve
+time,34$ekill,c57$ekill,c64$ekill,c81$ekill,c88$ealive,c56$ealive,c65$ealive,c80$ealive,c89$allsel,all$esel,all$solve
+time,35$ekill,c58$ekill,c63$ekill,c82$ekill,c87$ealive,c57$ealive,c64$ealive,c81$ealive,c88$allsel,all$esel,all$solve
+time,36$ekill,c59$ekill,c62$ekill,c83$ekill,c86$ealive,c58$ealive,c63$ealive,c82$ealive,c87$allsel,all$esel,all$solve
+time,37$ekill,c60$ekill,c61$ekill,c84$ekill,c85$ealive,c59$ealive,c62$ealive,c83$ealive,c86$allsel,all$esel,all$solve
+time,38$ealive,c60$ealive,c61$ealive,c84$ealive,c85$allsel,all$esel,all$solve
+
+save,s3,db
+finish
+
+!!! --------------------------------------- Post process ---------------------------------------
+/input, 'cr_post_process', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'

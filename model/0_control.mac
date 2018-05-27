@@ -32,12 +32,15 @@
 !!!----------------------------- Single Cable replacement -----------------------------
 !/input, 'single_cable_remove', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
 !/input, 'single_cable_remove_output_res', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
-/input, 'single_cable_remove_after_use_output_res', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+!/input, 'single_cable_remove_after_use_output_res', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
 
 !!!----------------------------- Cable replacement Schemas -----------------------------
 !/input, 'schema1', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
-!/input, 'schema1_2', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
-!/input, 'schema1_3', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+!/input, 'schema2', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+/input, 'schema3', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+!/input, 'schema4', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+!/input, 'schema5', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+!/input, 'schema6', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
 
 !!!---------------------------Post process---------------------------------
 !/input, 'output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'

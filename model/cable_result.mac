@@ -12,10 +12,10 @@ plls,ax_stress,ax_stress,0.01
     cable_force(index,1)=min_num
     !!! This 10 must refer to ETABLE,STATUS and find out your target etable
     !!! Starts from 1
-    *get,cable_force(index,2),etab,10,elem,min_num
+    *get,cable_force(index,2),etab,15,elem,min_num
 
     cable_stress(index,1)=min_num
-    *get,cable_stress(index,2),etab,5,elem,min_num 
+    *get,cable_stress(index,2),etab,12,elem,min_num 
 *enddo
 
 

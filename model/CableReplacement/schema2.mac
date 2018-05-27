@@ -1,0 +1,100 @@
+!!! 初应变在第二次张拉时增加10%
+!!! 换索顺序由中向边对称换索
+
+!########################## MODIFY ##########################
+file_folder_path='s2/'
+!########################## MODIFY ##########################
+
+/solu
+antype,0
+nlgeom,on
+sstif,on
+acel,,9.8
+
+!!! Schema 1
+!!! --------------------------------------- TIME ---------------------------------------
+time,1
+    allsel,all
+    esel,all
+    eplot
+    solve
+
+!!! --------------------------------------- TIME ---------------------------------------
+
+time,2
+
+    !########################## MODIFY ##########################
+    kill_1=72
+    kill_2=73
+    !########################## MODIFY ##########################
+
+    !!! 增加初应变
+    esel,s,elem,,c%kill_1%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,s,elem,,c%kill_2%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+
+    ekill,c%kill_1%
+    ekill,c%kill_2%
+    allsel,all
+    esel,all
+    eplot
+    solve
+
+!!! --------------------------------------- TIME ---------------------------------------
+
+!!! 更换73对，为3，73
+*do,step_num,3,73
+    time,step_num
+
+    alive_1=kill_1
+    alive_2=kill_2
+
+    !########################## MODIFY ##########################
+    kill_1=74-step_num
+    kill_2=71+step_num
+    !########################## MODIFY ##########################
+    
+    !!! 增加初应变
+    esel,s,elem,,c%alive_1%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+
+    esel,s,elem,,c%alive_2%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+
+    ealive,c%alive_1%
+    ealive,c%alive_2%
+    ekill,c%kill_1%
+    ekill,c%kill_2%
+
+    allsel,all
+    esel,all
+    solve
+*enddo
+
+!!! --------------------------------------- TIME ---------------------------------------
+
+final_step_num=step_num+1
+time,final_step_num
+    alive_1=kill_1
+    alive_2=kill_2
+    !!! 增加初应变
+    esel,s,elem,,c%alive_1%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,all
+
+    esel,s,elem,,c%alive_2%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,all
+
+    ealive,c%alive_1%
+    ealive,c%alive_2%
+    allsel,all
+    esel,all
+    eplot
+    solve
+save,s2,db
+finish
+
+!!! --------------------------------------- Post process ---------------------------------------
+/input, 'cr_post_process', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'

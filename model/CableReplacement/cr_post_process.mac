@@ -1,0 +1,97 @@
+/post1
+g_element_total_num=362
+*dim,s1_force,array,144,2
+*dim,s1_stress,array,144,2
+*dim,girder_bend_stress_i,array,g_element_total_num,2
+*dim,girder_bend_moment,array,g_element_total_num,2
+*dim,girder_dis,array,362,2
+
+etable,caf,smisc,1      !!! cable force:  1
+etable,cas,ls,1         !!! cable stress: 2
+etable,gbs_i,smisc,34   !!! girder bend stress: 3
+etable,gbm,smisc,2      !!! girder bend moment: 4
+*do,step_num,1,final_step_num
+    !!! Step step
+    set,step_num
+    etable,refl
+
+    !!! CABLE FORCES AND STRESSES
+    *do,index,1,144
+        esel,s,elem,,c%index%
+        *get,min_num,elem,,num,min
+        !!! This "1" and "2" must refer to ETABLE,STATUS and find out your target etable
+        !!! Starts from 1
+        s1_force(index,1)=min_num
+        *get,s1_force(index,2),etab,1,elem,min_num
+        s1_stress(index,1)=min_num
+        *get,s1_stress(index,2),etab,2,elem,min_num 
+    *enddo
+
+    result_name='cf_step%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    *vwrite,s1_force(1,2)
+    (F20.4)
+    *cfclos
+
+    result_name='cs_step%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    *vwrite,s1_stress(1,2)
+    (F20.4)
+    *cfclos
+
+    !!! GIRDER BEND STRESS
+    count=0
+    *do,index,1,g_element_total_num
+        esel,s,elem,,inner_girder
+        count=elnext(count)
+        girder_bend_stress_i(count,1)=count
+        *get,girder_bend_stress_i(count,2),etab,3,elem,count
+        !girder_bend_stress_j(count,1)=count
+        !*get,girder_bend_stress_i(count,2),etab,4,elem,count
+    *enddo
+
+    result_name='gbs_step%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    *vwrite,girder_bend_stress_i(1,2)
+    (F20.4)
+    *cfclos
+
+    !!! GIRDER BEND MOMENT
+    count=0
+    *do,index,1,g_element_total_num
+        esel,s,elem,,inner_girder
+        count=elnext(count)
+        girder_bend_moment(count,1)=count
+        *get,girder_bend_moment(count,2),etab,4,elem,count
+    *enddo
+
+    result_name='gbm_step%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    *vwrite,girder_bend_moment(1,2)
+    (F20.4)
+    *cfclos
+    
+
+    !!! GIRDER DISPLACEMENT
+    *do,node_i,1,362
+        girder_dis(node_i,1)=node_i
+        girder_dis(node_i,2)=uy(node_i)
+    *enddo
+    result_name='gd_step_%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    !*vwrite,girder_dis(1,1),girder_dis(1,2)
+    *vwrite,girder_dis(1,2)
+    (F20.4)
+    *cfclos
+
+    !!! output images
+    jpeg_name='_step%step_num%'
+    prefix=jpeg_name
+    /input, 'cr_output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+
+*enddo

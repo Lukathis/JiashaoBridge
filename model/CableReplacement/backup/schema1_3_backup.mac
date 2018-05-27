@@ -1,8 +1,8 @@
 !!! 初应变在第二次张拉时增加10%
-
-target_folder_path='s1_3/'
-*dim,s1_force,array,144,2
-*dim,s1_stress,array,144,2
+!!! 换索顺序由边向中对称换索
+file_folder_path='s1_3/'
+!*dim,s1_force,array,144,2
+!*dim,s1_stress,array,144,2
 
 /solu
 antype,0
@@ -34,6 +34,7 @@ esel,all
 eplot
 solve
 
+!!! 更换73对，为3，73
 *do,step_num,3,73
     time,step_num
 
@@ -74,12 +75,11 @@ esel,all
 eplot
 solve
 
-save,s1_3,db
 !!! Post process
 finish
 /post1
-etable,ax_force,smisc,1
-etable,ax_stress,ls,1
+etable,caf,smisc,1
+etable,cas,ls,1
 *do,step_num,1,final_step_num
     !!! Step step
     set,step_num
@@ -97,36 +97,43 @@ etable,ax_stress,ls,1
         *get,s1_stress(index,2),etab,2,elem,min_num 
     *enddo
 
-    result_name='cable_force_%step_num%'
-    file_full_path=strcat(target_folder_path, result_name)
+    result_name='cf_step_%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
     *cfopen,file_full_path,txt
     *vwrite,s1_force(1,2)
     (F20.4)
     *cfclos
 
-    result_name='cable_stress_%step_num%'
-    file_full_path=strcat(target_folder_path, result_name)
+    result_name='cs_step_%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
     *cfopen,file_full_path,txt
     *vwrite,s1_stress(1,2)
     (F20.4)
     *vwrite
     *cfclos
 
-    /gfile,1200             !!! Resolution
-    /view,1,0,0,1           !!! View angle
-    /dist,1,1200,0          !!! View distance, 0 means absolute distance while 1 means relative
-    /pbc,cp,,0              !!! Turn off the cp
-    /pbc,u,,0               !!! Turn off u
-    /plopt,date,0           !!! Turn off date shown on jpeg images
-    /show,jpeg,,
-    esel,s,elem,,girders
-    etable,myi,smisc,2
-    etable,myj,smisc,15
-    esel,a,elem,,cables
-    plls,myi,myj,0.2
-    jpeg_name = 'G_BM%step_num%'
-    /show,close
-    default_name=strcat('JiashaoBridge','000')
-    jpeg_full_path=strcat(target_folder_path, jpeg_name)
-    /rename,default_name,jpg,,jpeg_full_path,jpg
+    !!! Output girder moment
+    !/gfile,1200             !!! Resolution
+    !/view,1,0,0,1           !!! View angle
+    !/dist,1,1200,0          !!! View distance, 0 means absolute distance while 1 means relative
+    !/pbc,cp,,0              !!! Turn off the cp
+    !/pbc,u,,0               !!! Turn off u
+    !/plopt,date,0           !!! Turn off date shown on jpeg images
+    !/show,jpeg,,
+    !esel,s,elem,,girders
+    !etable,myi,smisc,2
+    !etable,myj,smisc,15
+    !esel,a,elem,,cables
+    !plls,myi,myj,0.2
+    !jpeg_name = 'G_BM%step_num%'
+    !/show,close
+    !default_name=strcat('JiashaoBridge','000')
+    !jpeg_full_path=strcat(target_folder_path, jpeg_name)
+    !/rename,default_name,jpg,,jpeg_full_path,jpg
+
+    jpeg_name='_step%step_num%'
+    !prefix=strcat(target_folder_path, jpeg_name)
+    prefix=jpeg_name
+    /input, 'output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model'
+
 *enddo

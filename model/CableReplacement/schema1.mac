@@ -1,6 +1,14 @@
-target_folder_path='s1/'
-*dim,s1_force,array,144,2
-*dim,s1_stress,array,144,2
+!!! 初应变在第二次张拉时增加10%
+!!! 换索顺序由边向中对称换索
+file_folder_path='s1/'
+*dim,cable_reals_before_replacement,table,cable_real_num,2,1
+*tread,cable_reals_before_replacement,cable_reals_before_replacement,real,C:\Users\xuhui\Desktop\JiashaoBridge\model\Parameter\cable_reals
+
+*do,i,1,cable_real_num
+    r,1000+i,cable_reals_before_replacement(i,1)/1000000,cable_reals_before_replacement(i,2)
+*enddo
+*dim,cable_reals_comp_stat,table,cable_real_num,2,1
+ *tread,cable_reals_comp_stat,cable_reals_comp_stat,real,C:\Users\xuhui\Desktop\JiashaoBridge\model\Parameter\cable_reals
 
 /solu
 antype,0
@@ -16,6 +24,15 @@ eplot
 solve
 
 time,2
+    !!! 增加初应变
+    esel,s,elem,,c1
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,all
+
+    esel,s,elem,,c144
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,all
+
 ekill,c1,
 ekill,c144
 allsel,all
@@ -23,7 +40,19 @@ esel,all
 eplot
 solve
 
+!!! 更换73对，为3，73
 *do,step_num,3,73
+    time,step_num
+
+    !!! 增加初应变
+    esel,s,elem,,c%step_num-2%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,all
+
+    esel,s,elem,,c%145-(step_num-2)%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,all
+
     ealive,c%step_num-2%
     ekill,c%step_num-1%
 
@@ -35,7 +64,16 @@ solve
     solve
 *enddo
 
-time,74
+final_step_num=step_num+1
+time,final_step_num
+    !!! 增加初应变
+    esel,s,elem,,c72
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,all
+
+    esel,s,elem,,c73
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,all
 ealive,c72
 ealive,c73
 allsel,all
@@ -43,59 +81,5 @@ esel,all
 eplot
 solve
 
-save,s1,db
-!!! Post process
-finish
-/post1
-etable,ax_force,smisc,1
-etable,ax_stress,ls,1
-*do,step_num,1,74
-    !!! Step step
-    set,step_num
-    etable,refl
-
-    !!! Output result
-    *do,index,1,144
-        esel,s,elem,,c%index%
-        *get,min_num,elem,,num,min
-        !!! This "1" and "2" must refer to ETABLE,STATUS and find out your target etable
-        !!! Starts from 1
-        s1_force(index,1)=min_num
-        *get,s1_force(index,2),etab,1,elem,min_num
-        s1_stress(index,1)=min_num
-        *get,s1_stress(index,2),etab,2,elem,min_num 
-    *enddo
-
-    result_name='cable_force_%step_num%'
-    file_full_path=strcat(target_folder_path, result_name)
-    *cfopen,file_full_path,txt
-    *vwrite,s1_force(1,2)
-    (F20.4)
-    *cfclos
-
-    result_name='cable_stress_%step_num%'
-    file_full_path=strcat(target_folder_path, result_name)
-    *cfopen,file_full_path,txt
-    *vwrite,s1_stress(1,2)
-    (F20.4)
-    *vwrite
-    *cfclos
-
-    /gfile,1200             !!! Resolution
-    /view,1,0,0,1           !!! View angle
-    /dist,1,1200,0          !!! View distance, 0 means absolute distance while 1 means relative
-    /pbc,cp,,0              !!! Turn off the cp
-    /pbc,u,,0               !!! Turn off u
-    /plopt,date,0           !!! Turn off date shown on jpeg images
-    /show,jpeg,,
-    esel,s,elem,,girders
-    etable,myi,smisc,2
-    etable,myj,smisc,15
-    esel,a,elem,,cables
-    plls,myi,myj,0.2
-    jpeg_name = 'G_BM%step_num%'
-    /show,close
-    default_name=strcat('JiashaoBridge','000')
-    jpeg_full_path=strcat(target_folder_path, jpeg_name)
-    /rename,default_name,jpg,,jpeg_full_path,jpg
-*enddo
+!!! --------------------------------------- Post process ---------------------------------------
+/input, 'cr_post_process', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'

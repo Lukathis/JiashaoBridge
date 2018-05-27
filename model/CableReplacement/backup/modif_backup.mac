@@ -1,10 +1,7 @@
-
-
-    ! 获得c1中最小元素对应的实常数编号
+        ! 获得c1中最小元素对应的实常数编号
     *get,min_alive_element_1,elem,,num,min
     *get,orig_r_num,elem,min_alive_element_1,attr,real
     ! 获得对应是常数值
     *get,orig_r_value,rcon,orig_r_num,const,2
     ! 修改实常数
-    rmodif,orig_r_num,1,cable_reals_comp_stat(orig_r_num-1000,1)/1000000
-    rmodif,orig_r_num,2,cable_reals_comp_stat(orig_r_num-1000,2)
+    rmodif,orig_r_num,2,orig_r_value*1.01

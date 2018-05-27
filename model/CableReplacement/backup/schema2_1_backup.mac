@@ -1,0 +1,178 @@
+!!! 初应变在第二次张拉时增加10%
+!!! 换索顺序由边向中对称换索
+
+!########################## MODIFY ##########################
+file_folder_path='s2_1/'
+!########################## MODIFY ##########################
+g_element_total_num=362
+*dim,s1_force,array,144,2
+*dim,s1_stress,array,144,2
+*dim,girder_bend_stress_i,array,g_element_total_num,2
+*dim,girder_dis,array,362,2
+
+/solu
+antype,0
+nlgeom,on
+sstif,on
+acel,,9.8
+
+!!! Schema 1
+!!! --------------------------------------- TIME ---------------------------------------
+time,1
+    allsel,all
+    esel,all
+    eplot
+    solve
+
+!!! --------------------------------------- TIME ---------------------------------------
+
+time,2
+
+    !########################## MODIFY ##########################
+    kill_1=72
+    kill_2=73
+    !########################## MODIFY ##########################
+
+    !!! 增加初应变
+    esel,s,elem,,c%kill_1%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,s,elem,,c%kill_2%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+
+    ekill,c%kill_1%
+    ekill,c%kill_2%
+    allsel,all
+    esel,all
+    eplot
+    solve
+
+!!! --------------------------------------- TIME ---------------------------------------
+
+!!! 更换73对，为3，73
+*do,step_num,3,73
+    time,step_num
+
+    alive_1=kill_1
+    alive_2=kill_2
+
+    !########################## MODIFY ##########################
+    kill_1=74-step_num
+    kill_2=71+step_num
+    !########################## MODIFY ##########################
+    
+    !!! 增加初应变
+    esel,s,elem,,c%alive_1%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+
+    esel,s,elem,,c%alive_2%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+
+    ealive,c%alive_1%
+    ealive,c%alive_2%
+    ekill,c%kill_1%
+    ekill,c%kill_2%
+
+    allsel,all
+    esel,all
+    solve
+*enddo
+
+!!! --------------------------------------- TIME ---------------------------------------
+
+final_step_num=step_num+1
+time,final_step_num
+    alive_1=kill_1
+    alive_2=kill_2
+    !!! 增加初应变
+    esel,s,elem,,c%alive_1%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,all
+
+    esel,s,elem,,c%alive_2%
+    /input, 'M_modif_real', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+    esel,all
+
+    ealive,c%alive_1%
+    ealive,c%alive_2%
+    allsel,all
+    esel,all
+    eplot
+    solve
+save,s2_1,db
+
+!!! --------------------------------------- Post process ---------------------------------------
+finish
+/post1
+etable,caf,smisc,1      !!! cable force
+etable,cas,ls,1         !!! cable stress
+etable,gbs_i,smisc,34
+etable,gbs_j,smisc,39
+*do,step_num,1,final_step_num
+    !!! Step step
+    set,step_num
+    etable,refl
+
+    !!! CABLE FORCES AND STRESSES
+    *do,index,1,144
+        esel,s,elem,,c%index%
+        *get,min_num,elem,,num,min
+        !!! This "1" and "2" must refer to ETABLE,STATUS and find out your target etable
+        !!! Starts from 1
+        s1_force(index,1)=min_num
+        *get,s1_force(index,2),etab,1,elem,min_num
+        s1_stress(index,1)=min_num
+        *get,s1_stress(index,2),etab,2,elem,min_num 
+    *enddo
+
+    result_name='cf_step%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    *vwrite,s1_force(1,2)
+    (F20.4)
+    *cfclos
+
+    result_name='cs_step%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    *vwrite,s1_stress(1,2)
+    (F20.4)
+    *cfclos
+
+    !!! GIRDER BEND STRESS
+    count=0
+    *do,index,1,g_element_total_num
+        esel,s,elem,,inner_girder
+        count=elnext(count)
+        girder_bend_stress_i(count,1)=count
+        *get,girder_bend_stress_i(count,2),etab,3,elem,count
+        !girder_bend_stress_j(count,1)=count
+        !*get,girder_bend_stress_i(count,2),etab,4,elem,count
+    *enddo
+
+    result_name='gbs_step%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    *vwrite,girder_bend_stress_i(1,2)
+    (F20.4)
+    *cfclos
+    
+
+    !!! GIRDER DISPLACEMENT
+    *do,node_i,1,362
+        girder_dis(node_i,1)=node_i
+        girder_dis(node_i,2)=uy(node_i)
+    *enddo
+    result_name='gd_step_%step_num%'
+    file_full_path=strcat(file_folder_path, result_name)
+    *cfopen,file_full_path,txt
+    !*vwrite,girder_dis(1,1),girder_dis(1,2)
+    *vwrite,girder_dis(1,2)
+    (F20.4)
+    *cfclos
+
+    !!! output images
+    jpeg_name='_step%step_num%'
+    prefix=jpeg_name
+    /input, 'cr_output_images', 'mac', 'C:\Users\xuhui\Desktop\JiashaoBridge\model\CableReplacement'
+
+*enddo

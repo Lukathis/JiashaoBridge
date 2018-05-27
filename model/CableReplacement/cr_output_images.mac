@@ -9,7 +9,6 @@
 /pbc,cp,,0              !!! Turn off the cp
 /pbc,u,,0               !!! Turn off u
 /plopt,date,0           !!! Turn off date shown on jpeg images
-target_folder_path='pics/'
 
 !!! 1. Bending moment of main girder
 /show,jpeg,,
@@ -22,7 +21,7 @@ plls,myi,myj,0.2
 jpeg_name = strcat('G_BendingMoment', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
 
 
@@ -37,7 +36,7 @@ plls,z_shf_i,z_shf_j,0.1
 jpeg_name = strcat('G_ShearForce', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
 
 !!! 3. Axial stress of main girder
@@ -52,7 +51,7 @@ plls,gas_i,gas_j,0.1
 jpeg_name = strcat('G_AxialStress', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
 
 !!! 4. Bending stress of main girder
@@ -67,7 +66,7 @@ plls,gbs_i,gbs_j,0.2
 jpeg_name = strcat('G_BendStress', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
 
 !!! 5. Combination of axial and bending stress
@@ -82,7 +81,7 @@ plls,gcs_i,gcs_j,0.1
 jpeg_name = strcat('G_CombStress', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
 
 !!! ----------------------Towers--------------------
@@ -97,7 +96,7 @@ plls,tmy_i,tmy_j,0.2
 jpeg_name = strcat('T_BendingMoment', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
 
 !!! 2. Bending stress of towers
@@ -111,7 +110,7 @@ plls,tbs_i,tbs_j,0.2
 jpeg_name = strcat('T_BendStress', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
 
 !!! 3. Axial stress of towers
@@ -125,7 +124,7 @@ plls,tas_i,tas_j,0.1
 jpeg_name = strcat('T_AxialStress', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
 
 !!! 4. Combination of axial and bending stress of towers
@@ -139,7 +138,7 @@ plls,tcs_i,tcs_j,0.1
 jpeg_name = strcat('T_CombStress', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
 
 !!! ----------------------All--------------------
@@ -153,7 +152,7 @@ PLNSOL, U,Y, 0,1.0
 jpeg_name = strcat('Displacement_y', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
 
 /show,jpeg,,
@@ -164,5 +163,5 @@ PLNSOL, U,SUM, 0,1.0
 jpeg_name = strcat('Displacement_all', prefix)
 /show,close
 default_name=strcat('JiashaoBridge','000')
-jpeg_full_path=strcat(target_folder_path, jpeg_name)
+jpeg_full_path=strcat(file_folder_path, jpeg_name)
 /rename,default_name,jpg,,jpeg_full_path,jpg
